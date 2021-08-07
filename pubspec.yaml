@@ -22,7 +22,10 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets
+    - assets/Bread/Bread_1.png
+    - assets/Bread/Bread_2.png
+    - assets/Bread/Bread_3.png
+
 
   # fonts:
   #   - family: Schyler
