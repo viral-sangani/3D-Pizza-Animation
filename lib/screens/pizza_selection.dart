@@ -10,9 +10,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
   PageController _pageController =
       PageController(initialPage: 1, viewportFraction: 0.5);
   int _currentPageIndex = 1;
-
   AnimationController _pizzaTransformController;
-
   var images = [
     'assets/Bread/Bread_1.png',
     'assets/Bread/Bread_2.png',
@@ -20,8 +18,8 @@ class _PizzaSelectionState extends State<PizzaSelection>
   ];
 
   var _tweenPizzaTransform = Tween<double>(
-    begin: 0.5,
-    end: 1,
+    begin: 0.6,
+    end: 1.2,
   );
 
   Animation<double> curve;
@@ -29,7 +27,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
   @override
   void initState() {
     _pizzaTransformController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
 
     curve = _tweenPizzaTransform.animate(CurvedAnimation(
         parent: _pizzaTransformController, curve: Curves.easeOut));
@@ -50,6 +48,8 @@ class _PizzaSelectionState extends State<PizzaSelection>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: MediaQuery.of(context).size.height,
+        alignment: Alignment.center,
         child: PageView.builder(
           itemCount: images.length,
           controller: _pageController,
@@ -63,17 +63,26 @@ class _PizzaSelectionState extends State<PizzaSelection>
             return AnimatedBuilder(
                 animation: _pizzaTransformController,
                 builder: (content, _) {
-                  return Container(
-                    width: 10,
-                    height: 10,
-                    child: Transform.scale(
-                      scale: _currentPageIndex == i
-                          ? curve.value
-                          : (0.5 + 1 - curve.value),
-                      child: Image.asset(
-                        images[i],
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // this is used to move unselected pizza pallete down
+                      SizedBox(
+                        height: _currentPageIndex != i ? curve.value * 220 : 0,
                       ),
-                    ),
+                      Transform.scale(
+                        scale: _currentPageIndex == i
+                            ? curve.value
+                            : (_tweenPizzaTransform.begin +
+                                _tweenPizzaTransform.end -
+                                curve.value),
+                        child: Image.asset(images[i]),
+                      ),
+                      // this is used to move selected pizza pallete up
+                      SizedBox(
+                        height: _currentPageIndex == i ? curve.value * 100 : 0,
+                      )
+                    ],
                   );
                 });
           },
