@@ -25,6 +25,7 @@ flutter:
     - assets/Bread/Bread_1.png
     - assets/Bread/Bread_2.png
     - assets/Bread/Bread_3.png
+    - assets/plate.png
 
 
   # fonts:

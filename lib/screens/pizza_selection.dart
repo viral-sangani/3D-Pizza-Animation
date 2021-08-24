@@ -36,6 +36,11 @@ class _PizzaSelectionState extends State<PizzaSelection>
     super.initState();
   }
 
+  @override
+  dispose() {
+    super.dispose();
+  }
+
   animate() {
     if (_pizzaTransformController.isCompleted) {
       _pizzaTransformController.reverse();
@@ -50,42 +55,66 @@ class _PizzaSelectionState extends State<PizzaSelection>
       body: Container(
         height: MediaQuery.of(context).size.height,
         alignment: Alignment.center,
-        child: PageView.builder(
-          itemCount: images.length,
-          controller: _pageController,
-          onPageChanged: (i) {
-            setState(() {
-              _currentPageIndex = i;
-              animate();
-            });
-          },
-          itemBuilder: (context, i) {
-            return AnimatedBuilder(
-                animation: _pizzaTransformController,
-                builder: (content, _) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // this is used to move unselected pizza pallete down
-                      SizedBox(
-                        height: _currentPageIndex != i ? curve.value * 220 : 0,
-                      ),
-                      Transform.scale(
-                        scale: _currentPageIndex == i
-                            ? curve.value
-                            : (_tweenPizzaTransform.begin +
-                                _tweenPizzaTransform.end -
-                                curve.value),
-                        child: Image.asset(images[i]),
-                      ),
-                      // this is used to move selected pizza pallete up
-                      SizedBox(
-                        height: _currentPageIndex == i ? curve.value * 100 : 0,
-                      )
-                    ],
+        child: Stack(
+          children: [
+            Positioned(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Transform.scale(
+                    scale: 0.7,
+                    child: Image.asset('assets/plate.png'),
+                  ),
+                  SizedBox(
+                    height: 1.2 * 100,
+                  )
+                ],
+              ),
+            ),
+            Positioned(
+              child: PageView.builder(
+                itemCount: images.length,
+                controller: _pageController,
+                onPageChanged: (i) {
+                  setState(() {
+                    _currentPageIndex = i;
+                    animate();
+                  });
+                },
+                itemBuilder: (context, i) {
+                  return AnimatedBuilder(
+                    child: Image.asset(images[i]),
+                    animation: _pizzaTransformController,
+                    builder: (content, pizzaImage) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // this is used to move unselected pizza pallete down
+                          SizedBox(
+                            height:
+                                _currentPageIndex != i ? curve.value * 220 : 0,
+                          ),
+                          Transform.scale(
+                            scale: _currentPageIndex == i
+                                ? curve.value
+                                : (_tweenPizzaTransform.begin +
+                                    _tweenPizzaTransform.end -
+                                    curve.value),
+                            child: pizzaImage,
+                          ),
+                          // this is used to move selected pizza pallete up
+                          SizedBox(
+                            height:
+                                _currentPageIndex == i ? curve.value * 100 : 0,
+                          )
+                        ],
+                      );
+                    },
                   );
-                });
-          },
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
