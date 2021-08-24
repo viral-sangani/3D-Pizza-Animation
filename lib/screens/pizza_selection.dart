@@ -58,6 +58,52 @@ class _PizzaSelectionState extends State<PizzaSelection>
         child: Stack(
           children: [
             Positioned(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          // color: Colors.yellow.withOpacity(0.5),
+                          ),
+                      width: 200,
+                      height: 250,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(100),
+                            bottomRight: Radius.circular(100)),
+                        border: Border(top: BorderSide.none),
+                        color: Color(0xFFFBF7F5),
+                        boxShadow: [
+                          BoxShadow(color: Color(0xFFEBE7E9), spreadRadius: 3),
+                        ],
+                      ),
+                      width: 200,
+                      height: 250,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(height: 100),
+                          Text('New Orleans Pizza'),
+                          Text('15'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text('S'),
+                              Text('M'),
+                              Text('L'),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -106,7 +152,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
                           SizedBox(
                             height:
                                 _currentPageIndex == i ? curve.value * 100 : 0,
-                          )
+                          ),
                         ],
                       );
                     },
