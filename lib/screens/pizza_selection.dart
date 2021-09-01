@@ -66,6 +66,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF3EBEC),
       body: Container(
         // height: MediaQuery.of(context).size.height,
         alignment: Alignment.center,
@@ -79,8 +80,10 @@ class _PizzaSelectionState extends State<PizzaSelection>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Order Manually',
-                        style: TextStyle(fontSize: 22, color: Colors.black)),
-                    Icon(Icons.shopping_cart, size: 30),
+                        style:
+                            TextStyle(fontSize: 25, color: Color(0xFF7C3A3B))),
+                    Icon(Icons.shopping_cart,
+                        size: 30, color: Color(0xFF7C3A3B)),
                   ],
                 ),
               ),
@@ -88,17 +91,39 @@ class _PizzaSelectionState extends State<PizzaSelection>
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    Icon(Icons.location_on),
-                    Text('Washington'),
+                    Icon(
+                      Icons.location_on,
+                      color: Color(0xFF7C3A3B),
+                    ),
+                    Text('Washington',
+                        style: TextStyle(
+                            color: Color(0xFF7C3A3B),
+                            fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: RaisedButton(
-                  child: Text('Pizza'),
+                child: ElevatedButton(
+                  child: Text(
+                    'Pizza',
+                    style: TextStyle(
+                        color: Color(0xFF7C3A3B),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  ),
                   onPressed: () {},
-                  color: Color(0xFFF5D061),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Color(0xFFF5D061)),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Color(0xFFF5D061))),
+                    ),
+                    // textStyle: MaterialStateProperty.all(
+                    // TextStyle(color: Colors.red, fontSize: 25)),
+                  ),
                 ),
               ),
               Container(
@@ -123,11 +148,14 @@ class _PizzaSelectionState extends State<PizzaSelection>
                                     bottomLeft: Radius.circular(100),
                                     bottomRight: Radius.circular(100)),
                                 border: Border(top: BorderSide.none),
-                                color: Color(0xFFFBF7F5),
+                                color: Color(0xFFFEF3ED),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Color(0xFFEBE7E9),
-                                      spreadRadius: 3),
+                                    color: Color(0xFFEBE7E9),
+                                    spreadRadius: 5,
+                                    offset: Offset(0.0, 3.0),
+                                    blurRadius: 20.0,
+                                  ),
                                 ],
                               ),
                               width: 200,
@@ -143,20 +171,25 @@ class _PizzaSelectionState extends State<PizzaSelection>
                                       child: Text(
                                         'New Orleans Pizza',
                                         style: TextStyle(
-                                            fontSize: 20, color: Colors.black),
+                                            fontSize: 20,
+                                            color: Color(0xFF7C3A3B)),
                                       ),
                                     ),
                                   ),
                                   SizedBox(height: 10),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Icon(Icons.star, size: 15),
-                                      Icon(Icons.star, size: 15),
-                                      Icon(Icons.star, size: 15),
-                                      Icon(Icons.star, size: 15),
-                                      Icon(Icons.star, size: 15),
-                                    ],
+                                  Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Icon(Icons.star,
+                                            size: 18, color: Color(0xFFCF7441)),
+                                        Icon(Icons.star,
+                                            size: 18, color: Color(0xFFCF7441)),
+                                        Icon(Icons.star,
+                                            size: 18, color: Color(0xFFCF7441))
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(height: 20),
                                   FadeTransition(
@@ -166,14 +199,37 @@ class _PizzaSelectionState extends State<PizzaSelection>
                                       child: Text('15',
                                           style: TextStyle(
                                               fontSize: 25,
-                                              color: Colors.black)),
+                                              color: Color(0xFF7C3A3B),
+                                              fontWeight: FontWeight.bold)),
                                     ),
                                   ),
                                   SizedBox(height: 20),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Text('S'),
+                                      Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.white,
+                                            border: Border.all(
+                                                width: 1, color: Colors.white),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color(0xFFEBE7E9),
+                                                spreadRadius: 2,
+                                                offset: Offset(0.0, 3.0),
+                                                blurRadius: 5,
+                                              )
+                                            ]),
+                                        child: Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text('S'),
+                                          ),
+                                        ),
+                                      ),
                                       SizedBox(width: 30),
                                       Text('M'),
                                       SizedBox(width: 30),
