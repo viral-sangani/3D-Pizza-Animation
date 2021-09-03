@@ -17,12 +17,12 @@ class _PizzaBoxState extends State<PizzaBox>
   double _circleDiameter = 300;
 
   //////////
-  AnimationController _centerPizzaController;
+  late AnimationController _centerPizzaController;
   var _centerPizzaTransform = Tween<double>(
     begin: 0,
     end: 300,
   );
-  Animation<double> _centerPizzaAnimation;
+  late Animation<double> _centerPizzaAnimation;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _PizzaBoxState extends State<PizzaBox>
 
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       moveToCenter();
     });
   }

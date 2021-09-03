@@ -10,7 +10,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
   PageController _pageController =
       PageController(initialPage: 1, viewportFraction: 0.5);
   int _currentPageIndex = 1;
-  AnimationController _pizzaTransformController;
+  late AnimationController _pizzaTransformController;
   var images = [
     'assets/Bread/Bread_1.png',
     'assets/Bread/Bread_2.png',
@@ -22,7 +22,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
     end: 1.2,
   );
 
-  Animation<double> curve;
+  late Animation<double> curve;
 
   @override
   void initState() {
@@ -73,8 +73,8 @@ class _PizzaSelectionState extends State<PizzaSelection>
                       Transform.scale(
                         scale: _currentPageIndex == i
                             ? curve.value
-                            : (_tweenPizzaTransform.begin +
-                                _tweenPizzaTransform.end -
+                            : (_tweenPizzaTransform.begin! +
+                                _tweenPizzaTransform.end! -
                                 curve.value),
                         child: Image.asset(images[i]),
                       ),
