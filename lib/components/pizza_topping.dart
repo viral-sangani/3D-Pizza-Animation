@@ -45,13 +45,9 @@ class _PizzaToppingItemState extends State<PizzaToppingItem>
     setState(() {});
     Timer(Duration(milliseconds: 1), () {
       math.Random random = new math.Random();
-      radius = [
-        widget.pizzaSize * 0.4,
-        widget.pizzaSize * 0.65,
-        widget.pizzaSize * 0.9
-      ][random.nextInt(3)];
-      x = widget.pizzaSize + radius * math.cos(theta);
-      y = widget.pizzaSize + radius * math.sin(theta);
+      double radius = widget.pizzaSize * (random.nextInt(75) + 20) / 100;
+      x = widget.pizzaSize - 7 + radius * math.cos(theta);
+      y = widget.pizzaSize - 7 + radius * math.sin(theta);
       setState(() {});
     });
   }

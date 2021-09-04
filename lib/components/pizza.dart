@@ -34,7 +34,11 @@ class _PizzaState extends State<Pizza> {
           return ScaleTransition(
             scale: widget.scale,
             child: Stack(children: [
-              Image.asset(Constants.BREADS[0]),
+              Image.asset("assets/Plate.png"),
+              Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Image.asset(Constants.BREADS[0]),
+              ),
               if (ingridientsProvider.ingridients.length > 0)
                 for (int i = 0; i < ingridientsProvider.ingridients.length; i++)
                   for (int x = 0; x < 10; x++)
