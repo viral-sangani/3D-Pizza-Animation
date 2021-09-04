@@ -11,11 +11,11 @@ class PizzaToppingItem extends StatefulWidget {
   final int index;
   final int ingridentIndex;
   PizzaToppingItem({
-    Key key,
-    this.path,
-    this.pizzaSize,
-    this.index,
-    this.ingridentIndex,
+    Key? key,
+    required this.path,
+    required this.pizzaSize,
+    required this.index,
+    required this.ingridentIndex,
   }) : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class PizzaToppingItem extends StatefulWidget {
 
 class _PizzaToppingItemState extends State<PizzaToppingItem>
     with TickerProviderStateMixin {
-  double radius, x, y, theta;
+  late double radius, x, y, theta;
   List<double> randomPizzaRadius = [];
 
   removeIngridient(BuildContext context) {
@@ -37,6 +37,7 @@ class _PizzaToppingItemState extends State<PizzaToppingItem>
   void initState() {
     super.initState();
     theta = (2 * math.pi * widget.index) / 10;
+    y = 0;
     if (theta > math.pi / 2 && theta < (math.pi + math.pi / 2))
       x = -500;
     else

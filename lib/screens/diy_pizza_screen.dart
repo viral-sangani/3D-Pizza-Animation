@@ -3,16 +3,17 @@ import 'package:coding_challenge_2021/components/pizza.dart';
 import 'package:coding_challenge_2021/constants.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key}) : super(key: key);
+class DIYPizzaScreen extends StatefulWidget {
+  DIYPizzaScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _DIYPizzaScreenState createState() => _DIYPizzaScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> pizzaScale;
+class _DIYPizzaScreenState extends State<DIYPizzaScreen>
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> pizzaScale;
 
   @override
   void initState() {
@@ -51,12 +52,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ),
         child: Container(
           decoration: BoxDecoration(
-            boxShadow: [
-              // BoxShadow(
-              //   blurRadius: 12,
-              //   color: Color.fromRGBO(0, 0, 0, 0.04),
-              // ),
-            ],
+            boxShadow: [],
             color: Colors.white,
           ),
           child: Column(

@@ -1,10 +1,10 @@
 import 'package:coding_challenge_2021/constants.dart';
-import 'package:coding_challenge_2021/home_screen.dart';
+import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
 import 'package:flutter/material.dart';
 
 class Ingridient extends StatelessWidget {
   final Ingridients path;
-  const Ingridient({Key key, this.path}) : super(key: key);
+  const Ingridient({Key? key, required this.path}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,21 +1,17 @@
 import 'package:coding_challenge_2021/components/pizza_topping.dart';
 import 'package:coding_challenge_2021/constants.dart';
-import 'package:coding_challenge_2021/home_screen.dart';
 import 'package:coding_challenge_2021/ingridients_controller.dart';
+import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Pizza extends StatefulWidget {
   final Animation<double> scale;
   final AnimationController controller;
-  final List<Ingridients> ingridientsList;
-  final Function setIngridients;
   const Pizza({
-    Key key,
-    this.scale,
-    this.controller,
-    this.ingridientsList,
-    this.setIngridients,
+    Key? key,
+    required this.scale,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -39,8 +35,7 @@ class _PizzaState extends State<Pizza> {
             scale: widget.scale,
             child: Stack(children: [
               Image.asset(Constants.BREADS[0]),
-              if (ingridientsProvider.ingridients != null &&
-                  ingridientsProvider.ingridients.length > 0)
+              if (ingridientsProvider.ingridients.length > 0)
                 for (int i = 0; i < ingridientsProvider.ingridients.length; i++)
                   for (int x = 0; x < 10; x++)
                     PizzaToppingItem(
