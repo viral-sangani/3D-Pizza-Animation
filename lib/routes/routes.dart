@@ -1,4 +1,5 @@
 import 'package:coding_challenge_2021/routes/route_names.dart';
+import 'package:coding_challenge_2021/screens/pizza_selection.dart';
 import 'package:flutter/material.dart';
 
 class SetupRoutes {
@@ -7,7 +8,7 @@ class SetupRoutes {
   static Map<String, WidgetBuilder> get routes {
     return {
       Routes.HOME: (context) {
-        return SizedBox();
+        return PizzaSelection();
       },
     };
   }
