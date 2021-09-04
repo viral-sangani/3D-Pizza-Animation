@@ -1,6 +1,6 @@
 import 'package:coding_challenge_2021/components/ingridient.dart';
 import 'package:coding_challenge_2021/components/pizza.dart';
-import 'package:coding_challenge_2021/constants.dart';
+import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class DIYPizzaScreen extends StatefulWidget {

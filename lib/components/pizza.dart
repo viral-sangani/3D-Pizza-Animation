@@ -1,7 +1,7 @@
 import 'package:coding_challenge_2021/components/pizza_topping.dart';
-import 'package:coding_challenge_2021/constants.dart';
 import 'package:coding_challenge_2021/ingridients_controller.dart';
 import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
+import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
