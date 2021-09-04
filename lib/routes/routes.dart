@@ -1,14 +1,19 @@
 import 'package:coding_challenge_2021/routes/route_names.dart';
+import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
 import 'package:flutter/material.dart';
 
 class SetupRoutes {
   static String initialRoute = Routes.HOME;
-  // static String initialRoute = Routes.ADD_LINK;
+  static String dIYPizaa = Routes.DIYPIZZA;
+
   static Map<String, WidgetBuilder> get routes {
     return {
       Routes.HOME: (context) {
         return SizedBox();
       },
+      Routes.DIYPIZZA: (context) {
+        return DIYPizzaScreen();
+      }
     };
   }
 
