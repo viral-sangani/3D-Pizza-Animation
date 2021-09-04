@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  provider: ^6.0.0
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
@@ -22,7 +23,12 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets
+    - assets/
+    - assets/Basil/
+    - assets/Broccoli/
+    - assets/Mushroom/
+    - assets/Onion/
+    - assets/Sausage/
 
   # fonts:
   #   - family: Schyler
