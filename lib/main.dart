@@ -22,7 +22,7 @@ void main() async {
       initialRoute: SetupRoutes.initialRoute,
       routes: SetupRoutes.routes,
       navigatorKey: NavService.navKey,
-      home: PizzaSelection(),
+      // home: PizzaSelection(),
     ),
   );
 }

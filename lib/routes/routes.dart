@@ -1,12 +1,14 @@
 import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/screens/pizza_selection.dart';
+import 'package:coding_challenge_2021/screens/splash/splash.dart';
 import 'package:flutter/material.dart';
 
 class SetupRoutes {
-  static String initialRoute = Routes.HOME;
+  static String initialRoute = Routes.SPLASH;
   // static String initialRoute = Routes.ADD_LINK;
   static Map<String, WidgetBuilder> get routes {
     return {
+      Routes.SPLASH: (context) => Splash(),
       Routes.HOME: (context) {
         return PizzaSelection();
       },
