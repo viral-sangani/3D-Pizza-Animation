@@ -4,12 +4,23 @@ import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class PizzaViewModel extends ChangeNotifier {
+  double pizzaPrice = 15;
   late AnimationController pizzaAnimationController;
   late Animation<double> pizzaXVal;
   late bool scaleAnimateForward = false;
   late bool scaleAnimateReverse = false;
 
   SauceType sauceType = SauceType.Plain;
+
+  incPizzaPrice() {
+    pizzaPrice++;
+    notifyListeners();
+  }
+
+  decPizzaPrice() {
+    pizzaPrice--;
+    notifyListeners();
+  }
 
   setSauceType(SauceType type) {
     sauceType = type;

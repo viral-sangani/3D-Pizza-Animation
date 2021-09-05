@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:coding_challenge_2021/components/ingridient.dart';
 import 'package:coding_challenge_2021/components/pizza.dart';
+import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
+import 'package:coding_challenge_2021/view_models/ingridients_view_model.dart';
 import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +41,7 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
 
   @override
   Widget build(BuildContext context) {
+    PizzaViewModel pizzaViewModel = context.watch<PizzaViewModel>();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -50,36 +53,35 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
       ),
       body: Container(
         color: Colors.white,
-        padding: EdgeInsets.only(
-          left: Constants.PIZZAPADDING,
-          right: Constants.PIZZAPADDING,
-          top: 20,
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            boxShadow: [],
-            color: Colors.white,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Pizza(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                left: Constants.PIZZAPADDING,
+                right: Constants.PIZZAPADDING,
+              ),
+              child: Pizza(
                 scale: pizzaScale,
                 controller: _controller,
               ),
-              SizedBox(height: 40),
-              Text(
-                "Choose Sauce Type",
-                style: CustomTextStyles.chooseSauceTypeTextStyle(size: 18),
-              ),
-              SizedBox(height: 15),
-              Container(
-                width: double.infinity,
-                child: Wrap(
-                  alignment: WrapAlignment.center,
-                  spacing: 5,
-                  runSpacing: 8,
+            ),
+            SizedBox(height: 8),
+            Text("\$${pizzaViewModel.pizzaPrice.toInt().toString()}",
+                style: CustomTextStyles.priceStyle()),
+            SizedBox(height: 8),
+            Text(
+              "Choose Sauce Type",
+              style: CustomTextStyles.chooseSauceTypeTextStyle(size: 18),
+            ),
+            SizedBox(height: 15),
+            Container(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
                   children: [
+                    SizedBox(width: 40),
                     buildSauceType(
                       "Plain",
                       SauceType.Plain,
@@ -103,69 +105,103 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
                   ],
                 ),
               ),
-              SizedBox(height: 30),
-              Container(
-                width: double.infinity,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 20),
-                        buildIngridientContainer(Ingridients.SAUSAGE),
-                        buildIngridientContainer(Ingridients.MASHROOM),
-                        buildIngridientContainer(Ingridients.ONION),
-                        buildIngridientContainer(Ingridients.BASIL),
-                        buildIngridientContainer(Ingridients.BROCCOLI),
-                      ],
-                    ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              "Choose Toppings",
+              style: CustomTextStyles.chooseSauceTypeTextStyle(size: 18),
+            ),
+            SizedBox(height: 10),
+            Container(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(width: 40),
+                      buildIngridientContainer(Ingridients.SAUSAGE),
+                      buildIngridientContainer(Ingridients.MASHROOM),
+                      buildIngridientContainer(Ingridients.ONION),
+                      buildIngridientContainer(Ingridients.BASIL),
+                      buildIngridientContainer(Ingridients.BROCCOLI),
+                    ],
                   ),
                 ),
               ),
-              SizedBox(height: 40),
-            ],
-          ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              width: MediaQuery.of(context).size.width - 80,
+              decoration: BoxDecoration(
+                  color: ColorConstants.purple,
+                  borderRadius: BorderRadius.circular(20)),
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Center(
+                child: Text(
+                  "BUY NOW",
+                  style: CustomTextStyles.buyNowTextStyle(),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
   Widget buildSauceType(String text, SauceType sauceType) {
+    PizzaViewModel pizzaViewModel =
+        Provider.of<PizzaViewModel>(context, listen: true);
+    IngridientsViewModel ingridientsViewModel =
+        Provider.of<IngridientsViewModel>(context);
     return GestureDetector(
       onTap: () {
-        PizzaViewModel pizzaViewModel = Provider.of<PizzaViewModel>(
-          context,
-          listen: false,
-        );
-        pizzaViewModel.animateRev();
-        Timer(Duration(milliseconds: 800), () {
+        bool hasIngridients = ingridientsViewModel.ingridients.length > 0;
+        if (hasIngridients) pizzaViewModel.animateRev();
+        Timer(Duration(milliseconds: hasIngridients ? 800 : 100), () {
           pizzaViewModel.pizzaAnimationController.reverse();
         });
-        Timer(Duration(milliseconds: 1400), () {
+        Timer(Duration(milliseconds: hasIngridients ? 1400 : 700), () {
           pizzaViewModel.setSauceType(sauceType);
           pizzaViewModel.pizzaAnimationController.forward();
         });
-        Timer(Duration(milliseconds: 2000), () {
-          pizzaViewModel.animateForward();
-        });
+        if (hasIngridients)
+          Timer(Duration(milliseconds: 2000), () {
+            pizzaViewModel.animateForward();
+            pizzaViewModel.setSauceType(sauceType);
+          });
+        else
+          Timer(Duration(milliseconds: 2000), () {
+            pizzaViewModel.setSauceType(sauceType);
+          });
       },
       child: Container(
+        margin: EdgeInsets.only(right: 5),
         padding: EdgeInsets.symmetric(
           vertical: 7,
           horizontal: 17,
         ),
         decoration: BoxDecoration(
           border: Border.all(
-            color: Colors.brown,
+            color: ColorConstants.purple,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(30),
+          color: pizzaViewModel.sauceType == sauceType
+              ? ColorConstants.purple
+              : Colors.white,
         ),
         child: Text(
           text,
-          style: CustomTextStyles.pizzaSauceTextStyle(size: 18),
+          style: CustomTextStyles.pizzaSauceTextStyle(
+            size: 14,
+            color: pizzaViewModel.sauceType == sauceType
+                ? Colors.white
+                : ColorConstants.purple,
+          ),
         ),
       ),
     );

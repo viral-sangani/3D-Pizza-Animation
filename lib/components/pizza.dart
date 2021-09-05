@@ -82,6 +82,9 @@ class _PizzaState extends State<Pizza> with TickerProviderStateMixin {
             scale: widget.scale,
             child: Stack(children: [
               Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
                 height: pizzaSize * 2,
                 child: FadeTransition(
                   opacity: fadePlateVal,
@@ -127,6 +130,7 @@ class _PizzaState extends State<Pizza> with TickerProviderStateMixin {
             hasMovedIn = false;
           });
           ingridientsProvider.addIngridient(ingridient);
+          pizzaViewModel.incPizzaPrice();
           widget.controller.reverse();
         },
         onMove: (ingridient) {

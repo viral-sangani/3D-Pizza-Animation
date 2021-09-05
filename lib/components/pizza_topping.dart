@@ -90,7 +90,10 @@ class _PizzaToppingItemState extends State<PizzaToppingItem>
       top: y,
       left: x,
       child: GestureDetector(
-        onTap: () => removeIngridient(context),
+        onTap: () {
+          removeIngridient(context);
+          pizzaViewModel.decPizzaPrice();
+        },
         child: ScaleTransition(
           scale: scaleAnimation,
           child: Image(
