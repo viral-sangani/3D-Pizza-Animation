@@ -21,6 +21,9 @@ void main() async {
       debugShowCheckedModeBanner: false,
       initialRoute: SetupRoutes.initialRoute,
       routes: SetupRoutes.routes,
+      theme: ThemeData(
+        fontFamily: 'Montserrat',
+      ),
       navigatorKey: NavService.navKey,
       // home: PizzaSelection(),
     ),
