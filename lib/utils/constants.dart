@@ -1,5 +1,5 @@
 class Constants {
-  static const double PIZZAPADDING = 58;
+  static const double PIZZAPADDING = 40;
   static const double HEADERHEIGHT = 200;
 
   static const List<String> BREADS = [
@@ -7,6 +7,7 @@ class Constants {
     'assets/Bread/Bread_2.png',
     'assets/Bread/Bread_3.png',
     'assets/Bread/Bread_4.png',
+    'assets/Bread/Bread_5.png',
   ];
   static const List<String> BASIL = [
     'assets/Basil/Basil_1.png',

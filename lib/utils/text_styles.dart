@@ -3,6 +3,20 @@ import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextStyles {
+  static TextStyle pizzaSauceTextStyle({int size = 16}) => TextStyle(
+        color: ColorConstants.black,
+        fontSize: size.toFont,
+        letterSpacing: 0.1,
+        fontWeight: FontWeight.bold,
+      );
+
+  static TextStyle chooseSauceTypeTextStyle({int size = 16}) => TextStyle(
+        color: ColorConstants.black,
+        fontSize: size.toFont,
+        letterSpacing: 0.1,
+        fontWeight: FontWeight.bold,
+      );
+
   static TextStyle white({int size = 16}) => TextStyle(
       color: ColorConstants.white,
       fontSize: size.toFont,

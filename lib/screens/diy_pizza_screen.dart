@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:coding_challenge_2021/components/ingridient.dart';
 import 'package:coding_challenge_2021/components/pizza.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
+import 'package:coding_challenge_2021/utils/text_styles.dart';
+import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DIYPizzaScreen extends StatefulWidget {
   DIYPizzaScreen({Key? key}) : super(key: key);
@@ -56,70 +61,44 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
             color: Colors.white,
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.max,
             children: [
               Pizza(
                 scale: pizzaScale,
                 controller: _controller,
               ),
+              SizedBox(height: 40),
+              Text(
+                "Choose Sauce Type",
+                style: CustomTextStyles.chooseSauceTypeTextStyle(size: 18),
+              ),
+              SizedBox(height: 15),
               Container(
-                height: Constants.HEADERHEIGHT,
-                padding: EdgeInsets.symmetric(vertical: 35),
-                child: Column(
+                width: double.infinity,
+                child: Wrap(
+                  alignment: WrapAlignment.center,
+                  spacing: 5,
+                  runSpacing: 8,
                   children: [
-                    Text(
-                      "\$15",
-                      style: TextStyle(
-                        fontSize: 45,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    buildSauceType(
+                      "Plain",
+                      SauceType.Plain,
                     ),
-                    SizedBox(height: 35),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "S",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.red),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "M",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "L",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ],
+                    buildSauceType(
+                      "Peppery Red",
+                      SauceType.PepperyRed,
+                    ),
+                    buildSauceType(
+                      "Traditional Tomato",
+                      SauceType.TraditionalTomato,
+                    ),
+                    buildSauceType(
+                      "Spicy Red",
+                      SauceType.SpicyRed,
+                    ),
+                    buildSauceType(
+                      "None 🤯",
+                      SauceType.None,
                     ),
                   ],
                 ),
@@ -129,21 +108,64 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
                 width: double.infinity,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(width: 20),
-                      buildIngridientContainer(Ingridients.BASIL),
-                      buildIngridientContainer(Ingridients.BROCCOLI),
-                      buildIngridientContainer(Ingridients.MASHROOM),
-                      buildIngridientContainer(Ingridients.ONION),
-                      buildIngridientContainer(Ingridients.SAUSAGE),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(width: 20),
+                        buildIngridientContainer(Ingridients.SAUSAGE),
+                        buildIngridientContainer(Ingridients.MASHROOM),
+                        buildIngridientContainer(Ingridients.ONION),
+                        buildIngridientContainer(Ingridients.BASIL),
+                        buildIngridientContainer(Ingridients.BROCCOLI),
+                      ],
+                    ),
                   ),
                 ),
               ),
+              SizedBox(height: 40),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildSauceType(String text, SauceType sauceType) {
+    return GestureDetector(
+      onTap: () {
+        PizzaViewModel pizzaViewModel = Provider.of<PizzaViewModel>(
+          context,
+          listen: false,
+        );
+        pizzaViewModel.animateRev();
+        Timer(Duration(milliseconds: 800), () {
+          pizzaViewModel.pizzaAnimationController.reverse();
+        });
+        Timer(Duration(milliseconds: 1400), () {
+          pizzaViewModel.setSauceType(sauceType);
+          pizzaViewModel.pizzaAnimationController.forward();
+        });
+        Timer(Duration(milliseconds: 2000), () {
+          pizzaViewModel.animateForward();
+        });
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 7,
+          horizontal: 17,
+        ),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.brown,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Text(
+          text,
+          style: CustomTextStyles.pizzaSauceTextStyle(size: 18),
         ),
       ),
     );
@@ -157,7 +179,15 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.yellow[100],
-        borderRadius: BorderRadius.circular(35),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+        shape: BoxShape.circle,
       ),
       child: Ingridient(path: ingridient),
     );
