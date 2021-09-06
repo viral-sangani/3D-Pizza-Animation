@@ -27,6 +27,8 @@ flutter:
     - assets/Bread/Bread_1.png
     - assets/Bread/Bread_2.png
     - assets/Bread/Bread_3.png
+    - assets/illustrations/splash_bg.png
+    - assets/illustrations/user_form_image.png
 
 
   fonts:
