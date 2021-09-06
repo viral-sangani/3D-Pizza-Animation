@@ -102,7 +102,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
     LoadingDialog().hide();
 
     if (_result != null) {
-      SetupRoutes.pushAndRemoveAll(context, Routes.HOME);
+      SetupRoutes.pushAndRemoveAll(context, Routes.USER_FORM);
     } else {
       setState(() {
         _errorText = 'OTP verification failed';
@@ -263,7 +263,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
           padding: EdgeInsets.only(left: 30.0, top: 30.0),
           child: Text("Phone Number",
               style: TextStyle(
-                color: ColorConstants.black,
+                color: ColorConstants.DARK_GREY,
                 fontSize: 20,
               )),
         ),
@@ -280,9 +280,11 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
             ),
             decoration: InputDecoration(
               // hintTextDirection: TextDirection.rtl,
+              prefixText: '+91 ',
+              // floatingLabelBehavior: FloatingLabelBehavior.always,
               hintText: "Enter Phone Number",
               hintStyle: TextStyle(
-                color: ColorConstants.black,
+                color: ColorConstants.LIGHT_GREY,
                 fontSize: 16,
               ),
               contentPadding:
@@ -322,7 +324,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
           padding: EdgeInsets.only(left: 30.0, top: 30.0),
           child: Text("Otp",
               style: TextStyle(
-                color: ColorConstants.black,
+                color: ColorConstants.DARK_GREY,
                 fontSize: 20,
               )),
         ),
@@ -339,7 +341,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
             decoration: InputDecoration(
               hintText: "Enter OTP",
               hintStyle: TextStyle(
-                color: ColorConstants.black,
+                color: ColorConstants.LIGHT_GREY,
                 fontSize: 16,
               ),
               contentPadding:
