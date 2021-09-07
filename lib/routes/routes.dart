@@ -1,4 +1,5 @@
 import 'package:coding_challenge_2021/routes/route_names.dart';
+import 'package:coding_challenge_2021/screens/Home.dart';
 import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ class SetupRoutes {
   static Map<String, WidgetBuilder> get routes {
     return {
       Routes.HOME: (context) {
-        return SizedBox();
+        return Home();
       },
       Routes.DIYPIZZA: (context) {
         return DIYPizzaScreen();

@@ -30,6 +30,7 @@ flutter:
     - assets/Onion/
     - assets/Sausage/
     - assets/Bread/
+    - assets/Pizzas/
 
   fonts:
     - family: Montserrat
