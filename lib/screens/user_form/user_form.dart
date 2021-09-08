@@ -1,3 +1,4 @@
+import 'package:coding_challenge_2021/services/firestore_service.dart';
 import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/images.dart';
@@ -20,6 +21,8 @@ class _UserFormState extends State<UserForm> {
 
   @override
   void initState() {
+    FirestoreService().getUserDetails();
+
     _phoneController = TextEditingController(text: '+ 91 99999 99999');
     formFields = [
       {
