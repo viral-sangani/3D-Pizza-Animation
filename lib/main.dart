@@ -25,7 +25,7 @@ void main() {
         },
         title: 'DIY Pizza',
         debugShowCheckedModeBanner: false,
-        initialRoute: SetupRoutes.dIYPizaa,
+        initialRoute: SetupRoutes.pizzaSelection,
         routes: SetupRoutes.routes,
         navigatorKey: NavService.navKey,
         home: PizzaSelection(),

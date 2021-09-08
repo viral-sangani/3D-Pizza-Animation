@@ -30,6 +30,8 @@ flutter:
     - assets/Onion/
     - assets/Sausage/
     - assets/Bread/
+    - assets/Pizzas/
+    - assets/Extra/
 
   fonts:
     - family: Montserrat
@@ -38,3 +40,6 @@ flutter:
     - family: AbrilFatface
       fonts:
         - asset: assets/fonts/AbrilFatface/AbrilFatface-Regular.ttf
+    - family: AllertaStencil
+      fonts:
+        - asset: assets/fonts/AllertaStencil/AllertaStencil-Regular.ttf

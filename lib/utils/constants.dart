@@ -2,6 +2,14 @@ class Constants {
   static const double PIZZAPADDING = 40;
   static const double HEADERHEIGHT = 200;
 
+  static const List<String> PIZZAS = [
+    'assets/Pizzas/Pizza_1.png',
+    'assets/Pizzas/Pizza_2.png',
+    'assets/Pizzas/Pizza_3.png',
+    'assets/Pizzas/Pizza_4.png',
+    'assets/Pizzas/Pizza_5.png',
+  ];
+
   static const List<String> BREADS = [
     'assets/Bread/Bread_1.png',
     'assets/Bread/Bread_2.png',
@@ -89,5 +97,18 @@ class Constants {
     'assets/Sausage/Sausage_22.png',
     'assets/Sausage/Sausage_23.png',
     'assets/Sausage/Sausage_24.png',
+  ];
+
+  static const List<Map<String, dynamic>> EXTRA = [
+    {"path": 'assets/Extra/GreenSweetPepper.png', "size": 45.0},
+    {"path": 'assets/Sausage/Sausage_2.png', "size": 40.0},
+    {"path": 'assets/Extra/Red_Bell_Pepper_Chop.png', "size": 48.0},
+    {"path": 'assets/Extra/Red_Bell_Pepper_Sliced.png', "size": 42.0},
+    {"path": 'assets/Extra/Thyme_branch.png', "size": 60.0},
+    {"path": 'assets/Mushroom/Mushroom_5.png', "size": 60.0},
+    {"path": 'assets/Basil/Basil_1.png', "size": 60.0},
+    {"path": 'assets/Broccoli/Broccoli_1.png', "size": 46.0},
+    {"path": 'assets/Onion/Onion_2.png', "size": 55.0},
+    {"path": 'assets/Mushroom/Mushroom_6.png', "size": 60.0},
   ];
 }

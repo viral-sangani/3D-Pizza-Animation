@@ -45,7 +45,7 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '🍕 Home Screen 🍕',
+          '',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
