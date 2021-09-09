@@ -1,10 +1,11 @@
 import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/screens/Home.dart';
 import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
+import 'package:coding_challenge_2021/screens/splash.dart';
 import 'package:flutter/material.dart';
 
 class SetupRoutes {
-  static String initialRoute = Routes.HOME;
+  static String initialRoute = Routes.SPLASH;
   static String dIYPizaa = Routes.DIYPIZZA;
 
   static Map<String, WidgetBuilder> get routes {
@@ -14,7 +15,10 @@ class SetupRoutes {
       },
       Routes.DIYPIZZA: (context) {
         return DIYPizzaScreen();
-      }
+      },
+      Routes.SPLASH: (context) {
+        return Splash();
+      },
     };
   }
 

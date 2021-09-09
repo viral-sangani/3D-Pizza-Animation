@@ -32,6 +32,7 @@ class _HomeState extends State<Home> {
       'rating': 4.0,
     },
   ];
+  String searchText = '';
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +70,11 @@ class _HomeState extends State<Home> {
                             width: 200.toWidth,
                             padding: const EdgeInsets.only(left: 10),
                             child: TextFormField(
+                              onChanged: (String str) {
+                                setState(() {
+                                  searchText = str;
+                                });
+                              },
                               decoration: const InputDecoration(
                                   hintText: 'Search your food',
                                   hintStyle:
@@ -77,7 +83,7 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                         ),
-                        Icon(Icons.filter_1_outlined)
+                        Icon(Icons.filter_alt_outlined)
                       ],
                     ),
                   ),
@@ -89,10 +95,16 @@ class _HomeState extends State<Home> {
                     runSpacing: 10.0,
                     spacing: 15.0,
                     children: List.generate(4, (index) {
-                      return pizzaCard(
-                          pizzaOptions[index]['image'] as String,
-                          pizzaOptions[index]['name'] as String,
-                          pizzaOptions[index]['rating'] as double);
+                      String pizzaName = pizzaOptions[index]['name'] as String;
+                      pizzaName = pizzaName.toLowerCase();
+
+                      if (pizzaName.contains(searchText.toLowerCase().trim())) {
+                        return pizzaCard(
+                            pizzaOptions[index]['image'] as String,
+                            pizzaOptions[index]['name'] as String,
+                            pizzaOptions[index]['rating'] as double);
+                      } else
+                        return SizedBox();
                     })),
               ],
             ),

@@ -2,6 +2,8 @@ class Constants {
   static const double PIZZAPADDING = 58;
   static const double HEADERHEIGHT = 200;
 
+  static const PIZZA_SLICE_ANIMATION = 'assets/splash/pizza-slice.json';
+
   static const List<String> BREADS = [
     'assets/Bread/Bread_1.png',
     'assets/Bread/Bread_2.png',
