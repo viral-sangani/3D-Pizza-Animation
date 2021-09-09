@@ -1,6 +1,9 @@
+import 'package:coding_challenge_2021/common_components/loading_widget.dart';
+import 'package:coding_challenge_2021/model/user_data.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/images.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
+import 'package:coding_challenge_2021/view_models/user_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/routes/routes.dart';
@@ -8,6 +11,7 @@ import 'package:coding_challenge_2021/screens/splash/log_in/log_in.dart';
 import 'package:coding_challenge_2021/services/firebase_service.dart';
 import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -178,9 +182,30 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
                                 alignment: Alignment.centerRight,
                                 child: InkWell(
                                   onTap: isSignedIn
-                                      ? () {
-                                          SetupRoutes.pushAndRemoveAll(
-                                              context, Routes.USER_FORM);
+                                      ? () async {
+                                          // SetupRoutes.pushAndRemoveAll(
+                                          //     context, Routes.USER_FORM);
+                                          LoadingDialog().show(
+                                              text: 'Fetching user details');
+                                          var _userDataProvider =
+                                              Provider.of<UserDataProvider>(
+                                                  context,
+                                                  listen: false);
+
+                                          await _userDataProvider
+                                              .getUserDetails();
+
+                                          LoadingDialog().hide();
+
+                                          if (_userDataProvider.userData ==
+                                              null) {
+                                            SetupRoutes.pushAndRemoveAll(
+                                                context, Routes.USER_FORM);
+                                          } else {
+                                            SetupRoutes.pushAndRemoveAll(
+                                                context,
+                                                Routes.PIZZA_SELECTION);
+                                          }
                                         }
                                       : _animate,
                                   child: Container(

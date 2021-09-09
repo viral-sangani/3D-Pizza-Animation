@@ -2,12 +2,14 @@ import 'dart:ui';
 
 import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
+import 'package:coding_challenge_2021/view_models/user_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:coding_challenge_2021/common_components/loading_widget.dart';
 import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/routes/routes.dart';
 import 'package:coding_challenge_2021/services/firebase_service.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -102,7 +104,17 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
     LoadingDialog().hide();
 
     if (_result != null) {
-      SetupRoutes.pushAndRemoveAll(context, Routes.USER_FORM);
+      LoadingDialog().show(text: 'Fetching user details');
+      var _userDataProvider =
+          Provider.of<UserDataProvider>(context, listen: false);
+      await _userDataProvider.getUserDetails();
+
+      LoadingDialog().hide();
+      if (_userDataProvider.userData == null) {
+        SetupRoutes.pushAndRemoveAll(context, Routes.USER_FORM);
+      } else {
+        SetupRoutes.pushAndRemoveAll(context, Routes.PIZZA_SELECTION);
+      }
     } else {
       setState(() {
         _errorText = 'OTP verification failed';

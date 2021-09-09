@@ -7,7 +7,8 @@ class FirestoreService {
   static FirestoreService _instance = FirestoreService._();
   factory FirestoreService() => _instance;
 
-  CollectionReference users = FirebaseFirestore.instance.collection('userData');
+  CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('userData');
 
   final usersRef =
       FirebaseFirestore.instance.collection('userData').withConverter<UserData>(
@@ -30,5 +31,16 @@ class FirestoreService {
     print('getUserDetails() ========> _userData: $_userData');
 
     return _userData;
+  }
+
+  Future<bool> setUserDetails(UserData _userData) {
+    return usersRef
+        .doc(FirebaseService().firebaseAuth.currentUser!.uid)
+        .set(_userData)
+        .then((value) => true)
+        .catchError((error) {
+      print("Failed to add user: $error");
+      return false;
+    });
   }
 }

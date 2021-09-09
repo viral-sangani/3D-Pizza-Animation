@@ -12,6 +12,7 @@ class SetupRoutes {
       Routes.SPLASH: (context) => Splash(),
       Routes.HOME: (context) => PizzaSelection(),
       Routes.USER_FORM: (context) => UserForm(),
+      Routes.PIZZA_SELECTION: (context) => PizzaSelection(),
     };
   }
 
