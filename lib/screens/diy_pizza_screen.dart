@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:coding_challenge_2021/components/ingridient.dart';
 import 'package:coding_challenge_2021/components/pizza.dart';
+import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
@@ -9,9 +11,12 @@ import 'package:coding_challenge_2021/view_models/ingridients_view_model.dart';
 import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:screenshot/screenshot.dart';
 
 class DIYPizzaScreen extends StatefulWidget {
-  DIYPizzaScreen({Key? key}) : super(key: key);
+  DIYPizzaScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _DIYPizzaScreenState createState() => _DIYPizzaScreenState();
@@ -21,11 +26,16 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> pizzaScale;
+  late Map<String, dynamic> selectedPizza;
+  String? pizzaPath;
+  ScreenshotController screenshotController = ScreenshotController();
 
   @override
   void initState() {
     super.initState();
-
+    selectedPizza =
+        Provider.of<PizzaViewModel>(context, listen: false).selectedPizzaObj;
+    pizzaPath = selectedPizza['path'] ?? "";
     _controller = AnimationController(
       duration: const Duration(milliseconds: 300),
       vsync: this,
@@ -43,110 +53,147 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
   Widget build(BuildContext context) {
     PizzaViewModel pizzaViewModel = context.watch<PizzaViewModel>();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: Container(
-        color: Colors.white,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                left: Constants.PIZZAPADDING,
-                right: Constants.PIZZAPADDING,
-              ),
-              child: Pizza(
-                scale: pizzaScale,
-                controller: _controller,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text("\$${pizzaViewModel.pizzaPrice.toInt().toString()}",
-                style: CustomTextStyles.priceStyle()),
-            SizedBox(height: 8),
-            Text(
-              "Choose Sauce Type",
-              style: CustomTextStyles.chooseSauceTypeTextStyle(size: 18),
-            ),
-            SizedBox(height: 15),
-            Container(
-              width: double.infinity,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    SizedBox(width: 40),
-                    buildSauceType(
-                      "Plain",
-                      SauceType.Plain,
-                    ),
-                    buildSauceType(
-                      "Peppery Red",
-                      SauceType.PepperyRed,
-                    ),
-                    buildSauceType(
-                      "Traditional Tomato",
-                      SauceType.TraditionalTomato,
-                    ),
-                    buildSauceType(
-                      "Spicy Red",
-                      SauceType.SpicyRed,
-                    ),
-                    buildSauceType(
-                      "None 🤯",
-                      SauceType.None,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              "Choose Toppings",
-              style: CustomTextStyles.chooseSauceTypeTextStyle(size: 18),
-            ),
-            SizedBox(height: 10),
-            Container(
-              width: double.infinity,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15.0),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  height: 60,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(width: 40),
-                      buildIngridientContainer(Ingridients.SAUSAGE),
-                      buildIngridientContainer(Ingridients.MASHROOM),
-                      buildIngridientContainer(Ingridients.ONION),
-                      buildIngridientContainer(Ingridients.BASIL),
-                      buildIngridientContainer(Ingridients.BROCCOLI),
+                      GestureDetector(
+                        onTap: () {
+                          Provider.of<IngridientsViewModel>(context,
+                                  listen: false)
+                              .ingridients = [];
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.chevron_left,
+                          size: 40,
+                          color: ColorConstants.purple,
+                        ),
+                      ),
+                      Icon(
+                        Icons.shopping_cart_outlined,
+                        size: 35,
+                        color: ColorConstants.purple,
+                      ),
                     ],
                   ),
                 ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              width: MediaQuery.of(context).size.width - 80,
-              decoration: BoxDecoration(
-                  color: ColorConstants.purple,
-                  borderRadius: BorderRadius.circular(20)),
-              padding: EdgeInsets.symmetric(vertical: 16),
-              child: Center(
-                child: Text(
-                  "BUY NOW",
-                  style: CustomTextStyles.buyNowTextStyle(),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: Constants.PIZZAPADDING,
+                      right: Constants.PIZZAPADDING,
+                      top: 20,
+                      bottom: 20),
+                  child: Pizza(
+                    screenshotController: screenshotController,
+                    scale: pizzaScale,
+                    controller: _controller,
+                    pizzaPath: pizzaPath ?? null,
+                  ),
                 ),
-              ),
+                SizedBox(height: 8),
+                Text("\$${pizzaViewModel.pizzaPrice.toInt().toString()}",
+                    style: CustomTextStyles.priceStyle()),
+                SizedBox(height: 8),
+                if (pizzaPath == null)
+                  Text(
+                    "Choose Sauce Type",
+                    style: CustomTextStyles.chooseSauceTypeTextStyle(size: 18),
+                  ),
+                if (pizzaPath == null) SizedBox(height: 15),
+                if (pizzaPath == null)
+                  Container(
+                    width: double.infinity,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          SizedBox(width: 40),
+                          buildSauceType(
+                            "Plain",
+                            SauceType.Plain,
+                          ),
+                          buildSauceType(
+                            "Peppery Red",
+                            SauceType.PepperyRed,
+                          ),
+                          buildSauceType(
+                            "Traditional Tomato",
+                            SauceType.TraditionalTomato,
+                          ),
+                          buildSauceType(
+                            "Spicy Red",
+                            SauceType.SpicyRed,
+                          ),
+                          buildSauceType(
+                            "None 🤯",
+                            SauceType.None,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                SizedBox(height: 20),
+                Text(
+                  "Choose Toppings",
+                  style: CustomTextStyles.chooseSauceTypeTextStyle(size: 18),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  width: double.infinity,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(width: 40),
+                          buildIngridientContainer(Ingridients.SAUSAGE),
+                          buildIngridientContainer(Ingridients.MASHROOM),
+                          buildIngridientContainer(Ingridients.ONION),
+                          buildIngridientContainer(Ingridients.BASIL),
+                          buildIngridientContainer(Ingridients.BROCCOLI),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () async {
+                    Uint8List? image = await screenshotController.capture();
+                    if (image != null) {
+                      context.read<PizzaViewModel>().pizzaImage = image;
+                    }
+                    Navigator.pushNamed(context, Routes.CHECKOUT);
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 80,
+                    decoration: BoxDecoration(
+                        color: ColorConstants.purple,
+                        borderRadius: BorderRadius.circular(20)),
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Center(
+                      child: Text(
+                        "BUY NOW",
+                        style: CustomTextStyles.buyNowTextStyle(),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

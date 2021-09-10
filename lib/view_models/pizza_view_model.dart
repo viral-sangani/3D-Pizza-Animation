@@ -1,14 +1,17 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class PizzaViewModel extends ChangeNotifier {
   double pizzaPrice = 15;
+  Map<String, dynamic> selectedPizzaObj = {};
   late AnimationController pizzaAnimationController;
   late Animation<double> pizzaXVal;
   late bool scaleAnimateForward = false;
   late bool scaleAnimateReverse = false;
+  late Uint8List pizzaImage;
 
   SauceType sauceType = SauceType.Plain;
 

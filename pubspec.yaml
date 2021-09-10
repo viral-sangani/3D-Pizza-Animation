@@ -13,7 +13,9 @@ dependencies:
     sdk: flutter
 
   provider: ^6.0.0
+  flutter_svg: ^0.22.0
   cupertino_icons: ^1.0.2
+  screenshot: ^1.2.3
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +39,9 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+        - weight: 800
+
     - family: AbrilFatface
       fonts:
         - asset: assets/fonts/AbrilFatface/AbrilFatface-Regular.ttf

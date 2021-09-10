@@ -7,14 +7,19 @@ import 'package:coding_challenge_2021/view_models/ingridients_view_model.dart';
 import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:screenshot/screenshot.dart';
 
 class Pizza extends StatefulWidget {
   final Animation<double> scale;
+  final ScreenshotController screenshotController;
   final AnimationController controller;
+  final String? pizzaPath;
   const Pizza({
     Key? key,
     required this.scale,
     required this.controller,
+    required this.screenshotController,
+    this.pizzaPath,
   }) : super(key: key);
 
   @override
@@ -76,77 +81,83 @@ class _PizzaState extends State<Pizza> with TickerProviderStateMixin {
         ],
         shape: BoxShape.circle,
       ),
-      child: DragTarget<Ingridients>(
-        builder: (ctx, candidate, ejects) {
-          return ScaleTransition(
-            scale: widget.scale,
-            child: Stack(children: [
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+      child: Screenshot(
+        controller: widget.screenshotController,
+        child: DragTarget<Ingridients>(
+          builder: (ctx, candidate, ejects) {
+            return ScaleTransition(
+              scale: widget.scale,
+              child: Stack(children: [
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  height: pizzaSize * 2,
+                  child: FadeTransition(
+                    opacity: fadePlateVal,
+                    child: Image.asset("assets/Plate.png"),
+                  ),
                 ),
-                height: pizzaSize * 2,
-                child: FadeTransition(
-                  opacity: fadePlateVal,
-                  child: Image.asset("assets/Plate.png"),
+                AnimatedBuilder(
+                  animation: pizzaViewModel.pizzaAnimationController,
+                  builder: (ctx, child) {
+                    return Transform.translate(
+                      offset: Offset(pizzaViewModel.pizzaXVal.value, 0),
+                      child: child,
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(14.0),
+                    child: Image.asset(
+                        widget.pizzaPath ?? pizzaViewModel.getSauceType()),
+                  ),
                 ),
-              ),
-              AnimatedBuilder(
-                animation: pizzaViewModel.pizzaAnimationController,
-                builder: (ctx, child) {
-                  return Transform.translate(
-                    offset: Offset(pizzaViewModel.pizzaXVal.value, 0),
-                    child: child,
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(14.0),
-                  child: Image.asset(pizzaViewModel.getSauceType()),
-                ),
-              ),
-              if (ingridientsProvider.ingridients.length > 0)
-                for (int i = 0; i < ingridientsProvider.ingridients.length; i++)
-                  for (int x = 0; x < 10; x++)
-                    Builder(
-                      builder: (ctx) {
-                        var data = getIngridientsBasePath(
-                          ingridientsProvider.ingridients[i],
-                          x,
-                        );
-                        return PizzaToppingItem(
-                          index: x,
-                          ingridentIndex: i,
-                          path: data['path'],
-                          pizzaSize: pizzaSize,
-                          toppingSize: data['size'],
-                        );
-                      },
-                    )
-            ]),
-          );
-        },
-        onAccept: (ingridient) {
-          setState(() {
-            hasMovedIn = false;
-          });
-          ingridientsProvider.addIngridient(ingridient);
-          pizzaViewModel.incPizzaPrice();
-          widget.controller.reverse();
-        },
-        onMove: (ingridient) {
-          if (!hasMovedIn) {
-            widget.controller.forward();
+                if (ingridientsProvider.ingridients.length > 0)
+                  for (int i = 0;
+                      i < ingridientsProvider.ingridients.length;
+                      i++)
+                    for (int x = 0; x < 10; x++)
+                      Builder(
+                        builder: (ctx) {
+                          var data = getIngridientsBasePath(
+                            ingridientsProvider.ingridients[i],
+                            x,
+                          );
+                          return PizzaToppingItem(
+                            index: x,
+                            ingridentIndex: i,
+                            path: data['path'],
+                            pizzaSize: pizzaSize,
+                            toppingSize: data['size'],
+                          );
+                        },
+                      )
+              ]),
+            );
+          },
+          onAccept: (ingridient) {
             setState(() {
-              hasMovedIn = true;
+              hasMovedIn = false;
             });
-          }
-        },
-        onLeave: (ingridient) {
-          widget.controller.reverse();
-          setState(() {
-            hasMovedIn = false;
-          });
-        },
+            ingridientsProvider.addIngridient(ingridient);
+            pizzaViewModel.incPizzaPrice();
+            widget.controller.reverse();
+          },
+          onMove: (ingridient) {
+            if (!hasMovedIn) {
+              widget.controller.forward();
+              setState(() {
+                hasMovedIn = true;
+              });
+            }
+          },
+          onLeave: (ingridient) {
+            widget.controller.reverse();
+            setState(() {
+              hasMovedIn = false;
+            });
+          },
+        ),
       ),
     );
   }

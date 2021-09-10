@@ -3,9 +3,20 @@ import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextStyles {
-  static TextStyle orderPizza({int size = 40}) => TextStyle(
+  static TextStyle changeAddress({double size = 15}) => TextStyle(
+        fontSize: size,
+        color: Colors.grey[500],
+        fontFamily: "Montserrat",
+      );
+
+  static TextStyle delivery({double size = 25}) => TextStyle(
+        fontSize: size,
+        fontWeight: FontWeight.w800,
+        fontFamily: "Montserrat",
+      );
+  static TextStyle orderPizza({double size = 40}) => TextStyle(
         fontFamily: "AllertaStencil",
-        fontSize: 40,
+        fontSize: size,
         color: ColorConstants.purple,
         // fontWeight: FontWeight.w700,
       );

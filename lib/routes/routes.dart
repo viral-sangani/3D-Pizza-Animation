@@ -1,4 +1,5 @@
 import 'package:coding_challenge_2021/routes/route_names.dart';
+import 'package:coding_challenge_2021/screens/checkout_page.dart';
 import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
 import 'package:coding_challenge_2021/screens/pizza_selection.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ class SetupRoutes {
   static String initialRoute = Routes.HOME;
   static String dIYPizza = Routes.DIYPIZZA;
   static String pizzaSelection = Routes.PIZZASELECTION;
+  static String checkoutPage = Routes.CHECKOUT;
 
   static Map<String, WidgetBuilder> get routes {
     return {
@@ -18,6 +20,9 @@ class SetupRoutes {
       },
       Routes.PIZZASELECTION: (context) {
         return PizzaSelection();
+      },
+      Routes.CHECKOUT: (context) {
+        return CheckoutPage();
       }
     };
   }

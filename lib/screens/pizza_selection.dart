@@ -6,7 +6,9 @@ import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
+import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PizzaSelection extends StatefulWidget {
   @override
@@ -155,7 +157,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
                         child: PizzaDetails(pizzaObj: pizzaObj),
                       ),
                       Positioned(
-                        left: 10,
+                        left: 0,
                         child: Transform.rotate(
                           angle: rotateVal + rotateBg.value,
                           child: PizzaBg(),
@@ -165,7 +167,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
                         padding: EdgeInsets.only(top: 50),
                         height: 650,
                         child: PageView.builder(
-                          itemCount: Constants.PIZZAS.length,
+                          itemCount: pizzas.length,
                           controller: _pageController,
                           onPageChanged: (i) {
                             setState(() {
@@ -201,23 +203,26 @@ class _PizzaSelectionState extends State<PizzaSelection>
                                                     curve.value),
                                             child: GestureDetector(
                                               onTap: () {
-                                                // Navigator.of(context)
-                                                //     .pushNamed(Routes.DIYPIZZA);
+                                                final pizzaViewModel =
+                                                    Provider.of<PizzaViewModel>(
+                                                        context,
+                                                        listen: false);
+                                                pizzaViewModel
+                                                        .selectedPizzaObj =
+                                                    pizzaObj;
+                                                pizzaViewModel.pizzaPrice =
+                                                    double.parse(
+                                                        pizzaObj['price']);
                                                 Navigator.push(
                                                   context,
-                                                  MaterialPageRoute(
-                                                    builder: (_) {
-                                                      return DIYPizzaScreen();
-                                                    },
-                                                  ),
+                                                  _createRoute(
+                                                      pizzaObj['name']),
                                                 );
                                               },
-                                              child: Padding(
+                                              child: Container(
                                                 padding: EdgeInsets.all(15),
-                                                child: Hero(
-                                                  tag: Text("Pizza123"),
-                                                  child: Image.asset(
-                                                      Constants.PIZZAS[i]),
+                                                child: Image.asset(
+                                                  pizzas[i]['path'],
                                                 ),
                                               ),
                                             ),
@@ -254,25 +259,49 @@ List<Map<String, dynamic>> pizzas = [
     "name": "Tomato Pizza",
     "rating": 4,
     "price": "13",
+    "path": Constants.PIZZAS[0],
   },
   {
     "name": "Pepperoni Pizza",
     "rating": 3,
     "price": "15",
+    "path": Constants.PIZZAS[1],
   },
   {
     "name": "Pineapple Pizza",
     "rating": 2,
     "price": "14",
+    "path": Constants.PIZZAS[2],
   },
   {
     "name": "Veg. Pizza",
     "rating": 4,
     "price": "12",
+    "path": Constants.PIZZAS[3],
   },
   {
     "name": "Cheeze Burst",
     "rating": 5,
     "price": "18",
+    "path": Constants.PIZZAS[4],
   }
 ];
+
+Route _createRoute(String path) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) {
+      return DIYPizzaScreen();
+    },
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      var tween = Tween(begin: begin, end: end).chain(
+        CurveTween(curve: Curves.ease),
+      );
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
+}

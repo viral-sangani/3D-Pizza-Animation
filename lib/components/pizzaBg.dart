@@ -13,19 +13,23 @@ class PizzaBg extends StatefulWidget {
 class _PizzaBgState extends State<PizzaBg> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: MediaQuery.of(context).size.width - 20,
-        height: 400,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-        ),
-        child: Stack(
-          children: [
-            for (int i = 0; i < Constants.EXTRA.length; i++)
-              PizzaBgTopping(
-                  width: MediaQuery.of(context).size.width, index: i),
-          ],
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      alignment: Alignment.center,
+      child: Center(
+        child: Container(
+          width: 400,
+          height: 400,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+          ),
+          child: Stack(
+            children: [
+              for (int i = 0; i < Constants.EXTRA.length; i++)
+                PizzaBgTopping(
+                    width: MediaQuery.of(context).size.width, index: i),
+            ],
+          ),
         ),
       ),
     );
@@ -51,11 +55,10 @@ class _PizzaBgToppingState extends State<PizzaBgTopping> {
   @override
   void initState() {
     super.initState();
-    math.Random random = math.Random();
-    radius = random.nextInt(10) + 170;
+    radius = 185;
     theta = (2 * math.pi * widget.index) / Constants.EXTRA.length;
-    x = (widget.width - 80) / 2 + radius * math.cos(theta);
-    y = (widget.width - 80) / 2 + radius * math.sin(theta);
+    x = 180 + radius * math.cos(theta);
+    y = 180 + radius * math.sin(theta);
   }
 
   @override
