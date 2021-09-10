@@ -13,6 +13,9 @@ dependencies:
     sdk: flutter
 
   provider: ^6.0.0
+  firebase_core: ^1.6.0
+  firebase_auth: ^3.1.0
+  cloud_firestore: ^2.5.1
   cupertino_icons: ^1.0.2
   lottie: ^1.1.0
 
@@ -33,6 +36,12 @@ flutter:
     - assets/Bread/
     - assets/Pizzas/
     - assets/splash/
+    - assets/Bread/Bread_1.png
+    - assets/Bread/Bread_2.png
+    - assets/Bread/Bread_3.png
+    - assets/illustrations/splash_bg.png
+    - assets/illustrations/user_form_image.png
+
 
   fonts:
     - family: Montserrat

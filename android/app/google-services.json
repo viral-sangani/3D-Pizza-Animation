@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "408507875704",
+    "project_id": "diypizza-5032b",
+    "storage_bucket": "diypizza-5032b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408507875704:android:0df476d511231826d3488d",
+        "android_client_info": {
+          "package_name": "com.example.coding_challenge_2021"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408507875704-beu32m2bksb83dfs01eq95ljkldbtrn0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4XOlaSGMobdjcIOxvWj-xMZg__zyqTak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408507875704-beu32m2bksb83dfs01eq95ljkldbtrn0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "408507875704-23aor9b3jd20osdjst0hvi94h4pp62tm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.codingChallenge2021"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
