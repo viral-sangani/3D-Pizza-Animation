@@ -1,5 +1,5 @@
 import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
-import 'package:coding_challenge_2021/utils/colors.dart';
+import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
 import 'package:coding_challenge_2021/view_models/ingridients_view_model.dart';
 import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
@@ -33,7 +33,6 @@ class CardDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 20),
                 Text(
                   "We will deliver in\n24 minutes to this address:",
                   style: CustomTextStyles.delivery(),
@@ -212,7 +211,10 @@ class CardDetails extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: ColorConstants.purple,
+                    color: Constants
+                        .cardModel[
+                            selectedCard ?? Constants.cardModel.length - 1]
+                        .bottomContainer[1],
                   ),
                   child: Row(
                     children: [
@@ -252,10 +254,11 @@ class CardDetails extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(width: 20),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),
+                SizedBox(width: 20),
               ],
             ),
           ),
@@ -278,6 +281,8 @@ class CardDetails extends StatelessWidget {
       else if (ingridient == Ingridients.SAUSAGE)
         ingridientsString += 'Sausage, ';
     });
-    return ingridientsString.substring(0, ingridientsString.length - 2);
+    return ingridientsString != ""
+        ? ingridientsString.substring(0, ingridientsString.length - 2)
+        : "";
   }
 }

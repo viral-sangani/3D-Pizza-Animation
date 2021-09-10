@@ -7,6 +7,7 @@ class CardModel {
   final List<Color> borderContainer2;
   final List<Color> bottomContainer;
   final List<Color> topCurveContainer;
+  final String pizzaBgImage;
 
   CardModel({
     required this.title,
@@ -15,5 +16,6 @@ class CardModel {
     required this.borderContainer2,
     required this.bottomContainer,
     required this.topCurveContainer,
+    required this.pizzaBgImage,
   });
 }

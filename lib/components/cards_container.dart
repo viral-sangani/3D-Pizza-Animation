@@ -3,7 +3,6 @@ import 'package:coding_challenge_2021/components/gradient_text.dart';
 import 'package:coding_challenge_2021/models/card_model.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CardsContainer extends StatefulWidget {
   final Animation containerHeightAnimation;
@@ -237,13 +236,12 @@ class CreditCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: 20,
-          right: 20,
+          bottom: -40,
+          right: -40,
           child: Container(
-            child: SvgPicture.asset(
-              "assets/rings.svg",
-              height: 80,
-              cacheColorFilter: true,
+            child: Image.asset(
+              cardModel.pizzaBgImage,
+              height: 180,
             ),
           ),
         ),

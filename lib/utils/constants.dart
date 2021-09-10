@@ -124,28 +124,6 @@ class Constants {
       title: "Executive Card",
       amount: 1163,
       borderContainer1: [
-        const Color(0xFF8c8a9e),
-        const Color(0xFFc2c0cf),
-        const Color(0xFFbdbbbd),
-      ],
-      borderContainer2: [
-        const Color(0xFF747281).withOpacity(0.7),
-        const Color(0xFFC0BEC0).withOpacity(0.1),
-      ],
-      bottomContainer: [
-        const Color(0xFF747281),
-        const Color(0xFFC0BEC0),
-        const Color(0xFFC0BEC0),
-      ],
-      topCurveContainer: [
-        const Color(0xFF7f7d8c),
-        const Color(0xFFc7c5c7),
-      ],
-    ),
-    CardModel(
-      title: "Gift Card",
-      amount: 1163,
-      borderContainer1: [
         const Color(0xFF161215),
         const Color(0xFF615c61),
         const Color(0xFF403c40),
@@ -163,6 +141,7 @@ class Constants {
         const Color(0xFF1f191d),
         const Color(0xFF595659),
       ],
+      pizzaBgImage: "assets/manager.png",
     ),
     CardModel(
       title: "Food Card",
@@ -185,6 +164,7 @@ class Constants {
         const Color(0xFFc47131),
         const Color(0xFFeba663),
       ],
+      pizzaBgImage: "assets/pizza.png",
     ),
     CardModel(
       title: "Gift Card",
@@ -207,6 +187,7 @@ class Constants {
         const Color(0xFF1d1a47),
         const Color(0xFF433E7C),
       ],
+      pizzaBgImage: "assets/giftbox.png",
     ),
   ];
 }
