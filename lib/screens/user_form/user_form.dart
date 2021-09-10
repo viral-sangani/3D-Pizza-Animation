@@ -1,9 +1,16 @@
+import 'package:coding_challenge_2021/common_components/loading_widget.dart';
+import 'package:coding_challenge_2021/model/user_data.dart';
+import 'package:coding_challenge_2021/routes/route_names.dart';
+import 'package:coding_challenge_2021/routes/routes.dart';
+import 'package:coding_challenge_2021/services/firebase_service.dart';
 import 'package:coding_challenge_2021/services/firestore_service.dart';
 import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/images.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
+import 'package:coding_challenge_2021/view_models/user_data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserForm extends StatefulWidget {
   const UserForm({Key? key}) : super(key: key);
@@ -13,50 +20,87 @@ class UserForm extends StatefulWidget {
 }
 
 class _UserFormState extends State<UserForm> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   var formFields = [];
-  late TextEditingController _phoneController = TextEditingController(),
-      _nameController = TextEditingController(),
-      _emailController = TextEditingController(),
-      _addressController = TextEditingController();
+  String? _phoneController,
+      _nameController,
+      _emailController,
+      _addressController;
+
+  String? _errorText;
+  late UserData _userData;
 
   @override
   void initState() {
-    FirestoreService().getUserDetails();
+    _userData = UserData(
+      name: '',
+      phoneNumber: '${FirebaseService().firebaseAuth.currentUser!.phoneNumber}',
+      address: '',
+    );
 
-    _phoneController = TextEditingController(text: '+ 91 99999 99999');
+    _phoneController = FirebaseService().firebaseAuth.currentUser!.phoneNumber;
     formFields = [
       {
         'label': 'Phone Number',
         'hintText': 'Enter Phone Number',
         'controller': _phoneController,
         'readOnly': true,
+        'function': (String value) {
+          _phoneController = value;
+        },
       },
       {
-        'label': 'Name',
+        'label': 'Name *',
         'hintText': 'Enter your name',
         'controller': _nameController,
         'readOnly': false,
+        'function': (String value) {
+          _nameController = value;
+        },
       },
       {
         'label': 'Email',
         'hintText': 'Enter Email',
         'controller': _emailController,
         'readOnly': false,
+        'function': (String value) {
+          _emailController = value;
+        },
       },
       {
-        'label': 'Address',
+        'label': 'Address *',
         'hintText': 'Enter your delivery address',
         'controller': _addressController,
         'readOnly': false,
+        'function': (String value) {
+          _addressController = value;
+        },
       },
     ];
     super.initState();
+  }
+
+  String getField(String label) {
+    switch (label) {
+      case 'Phone Number':
+        return _userData.phoneNumber;
+      case 'Name *':
+        return _userData.name;
+      case 'Email':
+        return _userData.email ?? '';
+      case 'Address *':
+        return _userData.address;
+      default:
+        return '';
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         resizeToAvoidBottomInset: false,
         backgroundColor: ColorConstants.lightGrey,
         body: Row(
@@ -101,10 +145,26 @@ class _UserFormState extends State<UserForm> {
                     SizedBox(height: 50.toHeight),
                     Column(
                       children: formFields.map((_field) {
-                        return _textField(_field['label'], _field['hintText'],
-                            _field['controller'], _field['readOnly']);
+                        return _textField(
+                            _field['label'],
+                            _field['hintText'],
+                            _field['controller'],
+                            _field['readOnly'],
+                            _field['function']);
                       }).toList(),
                     ),
+                    SizedBox(height: 30.toHeight),
+                    _errorText != null
+                        ? Text(
+                            _errorText!,
+                            style: TextStyle(
+                              color: ColorConstants.red,
+                              fontSize: 14.toFont,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            textAlign: TextAlign.center,
+                          )
+                        : SizedBox(),
                     SizedBox(height: 50.toHeight),
                     _saveButton(),
                     SizedBox(height: 20.toHeight),
@@ -118,8 +178,8 @@ class _UserFormState extends State<UserForm> {
     );
   }
 
-  Widget _textField(String label, String hintText,
-      TextEditingController controller, bool readOnly) {
+  Widget _textField(String label, String hintText, String? controller,
+      bool readOnly, Function(String)? onChanged) {
     return Column(
       children: [
         Container(
@@ -136,18 +196,19 @@ class _UserFormState extends State<UserForm> {
               left: 30.0.toWidth, right: 30.0.toWidth, top: 10.0.toHeight),
           width: double.infinity,
           child: TextFormField(
+            autovalidateMode: (controller?.isNotEmpty ?? false)
+                ? AutovalidateMode.always
+                : AutovalidateMode.onUserInteraction,
             readOnly: readOnly,
             autofocus: false,
             textInputAction: TextInputAction.next,
-            // initialValue: '+91 99999 99999',
-            controller: controller,
-            // textDirection: TextDirection.rtl,
+            initialValue: getField(label),
+            onChanged: onChanged,
             style: TextStyle(
               color: ColorConstants.black,
               fontSize: 20,
             ),
             decoration: InputDecoration(
-              // hintTextDirection: TextDirection.rtl,
               hintText: hintText,
               hintStyle: TextStyle(
                 color: ColorConstants.LIGHT_GREY,
@@ -162,10 +223,16 @@ class _UserFormState extends State<UserForm> {
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
                   borderSide: BorderSide(color: Color(0xFFEBEBEB), width: 2)),
+              focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(color: ColorConstants.RED, width: 2)),
+              errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(color: ColorConstants.RED, width: 2)),
             ),
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Can't leave this empty";
+              if ((label.contains('*')) && (value == null || value.isEmpty)) {
+                return "Cannot leave this empty";
               }
               return null;
             },
@@ -179,9 +246,7 @@ class _UserFormState extends State<UserForm> {
     return Padding(
       padding: EdgeInsets.only(left: 30.toWidth),
       child: InkWell(
-        onTap: () {
-          // SetupRoutes.pushAndRemoveAll(context, Routes.USER_FORM);
-        },
+        onTap: _onSaveCall,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 40.toHeight),
           alignment: Alignment.center,
@@ -243,5 +308,51 @@ class _UserFormState extends State<UserForm> {
         ),
       ),
     );
+  }
+
+  _onSaveCall() async {
+    if (_nameController?.isEmpty ?? true) {
+      _errorText = 'Please enter fields marked with *';
+      setState(() {});
+      return;
+    }
+
+    if (_addressController?.isEmpty ?? true) {
+      _errorText = 'Please enter fields marked with *';
+      setState(() {});
+      return;
+    }
+
+    var _userData = UserData(
+      name: _nameController!,
+      phoneNumber: _phoneController!,
+      address: _addressController!,
+      email: _emailController,
+    );
+
+    print('_userData $_userData');
+
+    LoadingDialog().show(text: 'Setting user details');
+
+    var _userDataProvider =
+        Provider.of<UserDataProvider>(context, listen: false);
+
+    await _userDataProvider.setUserDetails(_userData);
+
+    LoadingDialog().hide();
+
+    if (_userDataProvider.userData != null) {
+      SetupRoutes.pushAndRemoveAll(context, Routes.PIZZA_SELECTION);
+    } else {
+      ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(SnackBar(
+        backgroundColor: ColorConstants.RED,
+        content: Text(
+          'Failed, Try again!',
+          style: CustomTextStyles.customTextStyle(
+            ColorConstants.white,
+          ),
+        ),
+      ));
+    }
   }
 }
