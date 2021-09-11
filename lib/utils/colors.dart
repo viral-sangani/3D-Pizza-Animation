@@ -11,6 +11,7 @@ class ColorConstants {
   static const darkBlue = Color(0xFF0D1F44);
 
   static const purple = Color(0xFF58419C);
+  static const amber = Colors.amber;
   static const peach = Color(0xFF6EBCB7);
   static const blue = Color(0xFF0455BF);
   static const solidPink = Color(0xFFFE1094);

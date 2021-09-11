@@ -49,14 +49,14 @@ class _HomeState extends State<Home> {
             width: SizeConfig().screenWidth - 50.toWidth,
             height: 70.toHeight,
             decoration: BoxDecoration(
-              color: ColorConstants.purple,
+              color: ColorConstants.amber,
               border: Border(),
               borderRadius: BorderRadius.all(
                 Radius.circular(20.toWidth),
               ),
               boxShadow: [
                 BoxShadow(
-                  color: ColorConstants.purple,
+                  color: ColorConstants.amber,
                   blurRadius: 5,
                   offset: Offset(-3.0, -0.2),
                 )

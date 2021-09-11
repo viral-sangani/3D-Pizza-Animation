@@ -1,5 +1,6 @@
 import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/routes/routes.dart';
+import 'package:coding_challenge_2021/services/firebase_service.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -12,8 +13,12 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 5), () {
-      SetupRoutes.pushAndRemoveAll(context, Routes.HOME);
+    Future.delayed(Duration(seconds: 3), () {
+      if (FirebaseService().checkState()) {
+        SetupRoutes.pushAndRemoveAll(context, Routes.HOME);
+      } else {
+        SetupRoutes.pushAndRemoveAll(context, Routes.ONBOARDING);
+      }
     });
     super.initState();
   }
@@ -21,6 +26,7 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber,
       body: Center(
         child: Lottie.asset(Constants.PIZZA_SLICE_ANIMATION),
       ),

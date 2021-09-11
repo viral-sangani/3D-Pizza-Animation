@@ -108,7 +108,7 @@ class _UserFormState extends State<UserForm> {
             Container(
               width: 10.toWidth,
               height: SizeConfig().screenHeight,
-              color: ColorConstants.purple,
+              color: ColorConstants.amber,
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -253,7 +253,7 @@ class _UserFormState extends State<UserForm> {
           width: double.infinity,
           height: 60.toHeight,
           decoration: BoxDecoration(
-            color: ColorConstants.purple,
+            color: ColorConstants.amber,
             border: Border(),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20.toWidth),
@@ -261,7 +261,7 @@ class _UserFormState extends State<UserForm> {
             ),
             boxShadow: [
               BoxShadow(
-                color: ColorConstants.purple,
+                color: ColorConstants.amber,
                 blurRadius: 5,
                 // spreadRadius: 8,
                 offset: Offset(-3.0, -0.2),

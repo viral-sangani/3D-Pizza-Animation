@@ -1,7 +1,7 @@
 import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/screens/Home.dart';
 import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
-// import 'package:coding_challenge_2021/screens/splash.dart';
+import 'package:coding_challenge_2021/screens/splash.dart';
 import 'package:coding_challenge_2021/screens/pizza_selection.dart';
 import 'package:coding_challenge_2021/screens/splash/splash.dart';
 import 'package:coding_challenge_2021/screens/user_form/user_form.dart';
@@ -23,6 +23,9 @@ class SetupRoutes {
       },
       Routes.HOME: (context) {
         return Home();
+      },
+      Routes.ONBOARDING: (context) {
+        return Onboarding();
       }
     };
   }
