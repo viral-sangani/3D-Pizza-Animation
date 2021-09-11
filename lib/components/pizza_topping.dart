@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:coding_challenge_2021/ingridients_controller.dart';
+import 'package:coding_challenge_2021/services/size_config.dart';
+import 'package:coding_challenge_2021/view_models/ingridients_view_model.dart';
+import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,12 +12,14 @@ class PizzaToppingItem extends StatefulWidget {
   final double pizzaSize;
   final int index;
   final int ingridentIndex;
+  final double toppingSize;
   PizzaToppingItem({
     Key? key,
     required this.path,
     required this.pizzaSize,
     required this.index,
     required this.ingridentIndex,
+    required this.toppingSize,
   }) : super(key: key);
 
   @override
@@ -26,10 +30,12 @@ class _PizzaToppingItemState extends State<PizzaToppingItem>
     with TickerProviderStateMixin {
   late double radius, x, y, theta;
   List<double> randomPizzaRadius = [];
+  late Animation<double> scaleAnimation;
+  late AnimationController controller;
 
   removeIngridient(BuildContext context) {
     context
-        .read<IngridientsController>()
+        .read<IngridientsViewModel>()
         .removeIngridient(widget.ingridentIndex);
   }
 
@@ -43,28 +49,59 @@ class _PizzaToppingItemState extends State<PizzaToppingItem>
     else
       x = 500;
     setState(() {});
+    math.Random random = new math.Random();
+    controller = AnimationController(
+      duration: Duration(milliseconds: random.nextInt(300) + 100),
+      vsync: this,
+    );
+    scaleAnimation = Tween<double>(
+      begin: 1.6,
+      end: 1,
+    ).animate(CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeOut,
+    ));
     Timer(Duration(milliseconds: 1), () {
-      math.Random random = new math.Random();
-      double radius = widget.pizzaSize * (random.nextInt(75) + 20) / 100;
-      x = widget.pizzaSize - 7 + radius * math.cos(theta);
-      y = widget.pizzaSize - 7 + radius * math.sin(theta);
+      double radius = [
+        widget.pizzaSize * 0.3,
+        widget.pizzaSize * 0.5,
+        widget.pizzaSize * 0.7
+      ][random.nextInt(3)];
+      x = widget.pizzaSize - 10 + radius * math.cos(theta);
+      y = widget.pizzaSize - 10 + radius * math.sin(theta);
+      controller.forward();
       setState(() {});
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final pizzaViewModel = context.watch<PizzaViewModel>();
+    if (pizzaViewModel.scaleAnimateForward) {
+      controller.forward();
+    }
+
+    if (pizzaViewModel.scaleAnimateReverse) {
+      controller.reverse();
+    }
+    math.Random random = new math.Random();
     return AnimatedPositioned(
-      duration: Duration(milliseconds: 400),
+      duration: Duration(milliseconds: random.nextInt(800) + 100),
       curve: Curves.bounceIn,
       top: y,
       left: x,
       child: GestureDetector(
-        onTap: () => removeIngridient(context),
-        child: Image(
-          image: AssetImage(widget.path),
-          height: 50,
-          width: 50,
+        onTap: () {
+          removeIngridient(context);
+          pizzaViewModel.decPizzaPrice();
+        },
+        child: ScaleTransition(
+          scale: scaleAnimation,
+          child: Image(
+            image: AssetImage(widget.path),
+            height: widget.toppingSize.toHeight,
+            width: widget.toppingSize.toWidth,
+          ),
         ),
       ),
     );

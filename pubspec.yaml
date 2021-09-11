@@ -13,10 +13,12 @@ dependencies:
     sdk: flutter
 
   provider: ^6.0.0
+  flutter_svg: ^0.22.0
+  cupertino_icons: ^1.0.2
+  screenshot: ^1.2.3
   firebase_core: ^1.6.0
   firebase_auth: ^3.1.0
   cloud_firestore: ^2.5.1
-  cupertino_icons: ^1.0.2
   lottie: ^1.1.0
 
 dev_dependencies:
@@ -35,6 +37,7 @@ flutter:
     - assets/Sausage/
     - assets/Bread/
     - assets/Pizzas/
+    - assets/Extra/
     - assets/splash/
     - assets/Bread/Bread_1.png
     - assets/Bread/Bread_2.png
@@ -42,8 +45,16 @@ flutter:
     - assets/illustrations/splash_bg.png
     - assets/illustrations/user_form_image.png
 
-
   fonts:
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+        - weight: 800
+
+    - family: AbrilFatface
+      fonts:
+        - asset: assets/fonts/AbrilFatface/AbrilFatface-Regular.ttf
+    - family: AllertaStencil
+      fonts:
+        - asset: assets/fonts/AllertaStencil/AllertaStencil-Regular.ttf
