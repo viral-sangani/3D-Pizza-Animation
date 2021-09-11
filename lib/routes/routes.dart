@@ -1,20 +1,25 @@
 import 'package:coding_challenge_2021/routes/route_names.dart';
+import 'package:coding_challenge_2021/screens/Home.dart';
 import 'package:coding_challenge_2021/screens/checkout_page.dart';
 import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
 import 'package:coding_challenge_2021/screens/pizza_selection.dart';
+import 'package:coding_challenge_2021/screens/splash/splash.dart';
+import 'package:coding_challenge_2021/screens/user_form/user_form.dart';
 import 'package:flutter/material.dart';
 
 class SetupRoutes {
-  static String initialRoute = Routes.HOME;
+  static String initialRoute = Routes.SPLASH;
   static String dIYPizza = Routes.DIYPIZZA;
   static String pizzaSelection = Routes.PIZZASELECTION;
   static String checkoutPage = Routes.CHECKOUT;
 
+  // static String initialRoute = Routes.ADD_LINK;
   static Map<String, WidgetBuilder> get routes {
     return {
-      Routes.HOME: (context) {
-        return SizedBox();
-      },
+      Routes.SPLASH: (context) => Splash(),
+      // Routes.HOME: (context) => PizzaSelection(),
+      Routes.USER_FORM: (context) => UserForm(),
+      Routes.PIZZA_SELECTION: (context) => PizzaSelection(),
       Routes.DIYPIZZA: (context) {
         return DIYPizzaScreen();
       },
@@ -23,6 +28,9 @@ class SetupRoutes {
       },
       Routes.CHECKOUT: (context) {
         return CheckoutPage();
+      },
+      Routes.HOME: (context) {
+        return Home();
       }
     };
   }

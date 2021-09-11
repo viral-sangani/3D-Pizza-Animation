@@ -12,6 +12,7 @@ class Constants {
     'assets/Pizzas/Pizza_4.png',
     'assets/Pizzas/Pizza_5.png',
   ];
+  static const PIZZA_SLICE_ANIMATION = 'assets/splash/pizza-slice.json';
 
   static const List<String> BREADS = [
     'assets/Bread/Bread_1.png',
