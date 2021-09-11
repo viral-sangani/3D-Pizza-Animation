@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:coding_challenge_2021/components/ingridient.dart';
 import 'package:coding_challenge_2021/components/pizza.dart';
 import 'package:coding_challenge_2021/routes/route_names.dart';
+import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
@@ -61,8 +62,8 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
               mainAxisSize: MainAxisSize.max,
               children: [
                 Container(
-                  height: 60,
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  height: 40.toHeight,
+                  padding: EdgeInsets.symmetric(horizontal: 20.toWidth),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -75,13 +76,13 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
                         },
                         child: Icon(
                           Icons.chevron_left,
-                          size: 40,
+                          size: 40.toFont,
                           color: ColorConstants.purple,
                         ),
                       ),
                       Icon(
                         Icons.shopping_cart_outlined,
-                        size: 35,
+                        size: 35.toFont,
                         color: ColorConstants.purple,
                       ),
                     ],
@@ -89,10 +90,9 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      left: Constants.PIZZAPADDING,
-                      right: Constants.PIZZAPADDING,
-                      top: 20,
-                      bottom: 20),
+                    left: Constants.PIZZAPADDING,
+                    right: Constants.PIZZAPADDING,
+                  ),
                   child: Pizza(
                     screenshotController: screenshotController,
                     scale: pizzaScale,
@@ -100,16 +100,16 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
                     pizzaPath: pizzaPath ?? null,
                   ),
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 8.toHeight),
                 Text("\$${pizzaViewModel.pizzaPrice.toInt().toString()}",
                     style: CustomTextStyles.priceStyle()),
-                SizedBox(height: 8),
+                SizedBox(height: 8.toHeight),
                 if (pizzaPath == null)
                   Text(
                     "Choose Sauce Type",
                     style: CustomTextStyles.chooseSauceTypeTextStyle(size: 18),
                   ),
-                if (pizzaPath == null) SizedBox(height: 15),
+                if (pizzaPath == null) SizedBox(height: 15.toHeight),
                 if (pizzaPath == null)
                   Container(
                     width: double.infinity,
@@ -117,7 +117,7 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          SizedBox(width: 40),
+                          SizedBox(width: 40.toWidth),
                           buildSauceType(
                             "Plain",
                             SauceType.Plain,
@@ -142,22 +142,22 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
                       ),
                     ),
                   ),
-                SizedBox(height: 20),
+                SizedBox(height: 20.toHeight),
                 Text(
                   "Choose Toppings",
                   style: CustomTextStyles.chooseSauceTypeTextStyle(size: 18),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 10.toHeight),
                 Container(
                   width: double.infinity,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15.0),
+                      padding: EdgeInsets.symmetric(vertical: 15.0.toHeight),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 40),
+                          SizedBox(width: 40.toWidth),
                           buildIngridientContainer(Ingridients.SAUSAGE),
                           buildIngridientContainer(Ingridients.MASHROOM),
                           buildIngridientContainer(Ingridients.ONION),
@@ -168,7 +168,7 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 20.toHeight),
                 GestureDetector(
                   onTap: () async {
                     Uint8List? image = await screenshotController.capture();
@@ -178,11 +178,11 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
                     Navigator.pushNamed(context, Routes.CHECKOUT);
                   },
                   child: Container(
-                    width: MediaQuery.of(context).size.width - 80,
+                    width: (MediaQuery.of(context).size.width - 80).toWidth,
                     decoration: BoxDecoration(
                         color: ColorConstants.purple,
                         borderRadius: BorderRadius.circular(20)),
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                    padding: EdgeInsets.symmetric(vertical: 16.toHeight),
                     child: Center(
                       child: Text(
                         "BUY NOW",
@@ -226,10 +226,10 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
           });
       },
       child: Container(
-        margin: EdgeInsets.only(right: 5),
+        margin: EdgeInsets.only(right: 5.toWidth),
         padding: EdgeInsets.symmetric(
-          vertical: 7,
-          horizontal: 17,
+          vertical: 7.toHeight,
+          horizontal: 17.toWidth,
         ),
         decoration: BoxDecoration(
           border: Border.all(
@@ -256,9 +256,9 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
 
   Container buildIngridientContainer(Ingridients ingridient) {
     return Container(
-      height: 70,
-      width: 70,
-      margin: EdgeInsets.only(right: 20),
+      height: 70.toHeight,
+      width: 70.toWidth,
+      margin: EdgeInsets.only(right: 20.toWidth),
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.yellow[100],

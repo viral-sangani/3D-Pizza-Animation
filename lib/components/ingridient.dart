@@ -1,4 +1,5 @@
 import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
+import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -12,13 +13,13 @@ class Ingridient extends StatelessWidget {
       data: path,
       child: Image(
         image: AssetImage(getIngridientsPath(path)),
-        height: 50,
-        width: 50,
+        height: 50.toHeight,
+        width: 50.toWidth,
       ),
       feedback: Image(
         image: AssetImage(getIngridientsPath(path)),
-        height: 50,
-        width: 50,
+        height: 50.toHeight,
+        width: 50.toWidth,
       ),
       childWhenDragging: Container(),
     );

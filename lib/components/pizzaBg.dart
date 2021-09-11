@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -18,8 +19,8 @@ class _PizzaBgState extends State<PizzaBg> {
       alignment: Alignment.center,
       child: Center(
         child: Container(
-          width: 400,
-          height: 400,
+          width: 340.toWidth,
+          height: 340.toHeight,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
           ),
@@ -27,7 +28,9 @@ class _PizzaBgState extends State<PizzaBg> {
             children: [
               for (int i = 0; i < Constants.EXTRA.length; i++)
                 PizzaBgTopping(
-                    width: MediaQuery.of(context).size.width, index: i),
+                  width: MediaQuery.of(context).size.width,
+                  index: i,
+                ),
             ],
           ),
         ),
@@ -55,17 +58,17 @@ class _PizzaBgToppingState extends State<PizzaBgTopping> {
   @override
   void initState() {
     super.initState();
-    radius = 185;
+    radius = 160;
     theta = (2 * math.pi * widget.index) / Constants.EXTRA.length;
-    x = 180 + radius * math.cos(theta);
-    y = 180 + radius * math.sin(theta);
+    x = 156 + radius * math.cos(theta);
+    y = 162 + radius * math.sin(theta);
   }
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: x,
-      left: y,
+      top: x.toHeight,
+      left: y.toWidth,
       child: Container(
         child: Image(
           image: AssetImage(

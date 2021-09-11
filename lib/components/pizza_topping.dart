@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/view_models/ingridients_view_model.dart';
 import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
 import 'package:flutter/material.dart';
@@ -98,8 +99,8 @@ class _PizzaToppingItemState extends State<PizzaToppingItem>
           scale: scaleAnimation,
           child: Image(
             image: AssetImage(widget.path),
-            height: widget.toppingSize,
-            width: widget.toppingSize,
+            height: widget.toppingSize.toHeight,
+            width: widget.toppingSize.toWidth,
           ),
         ),
       ),

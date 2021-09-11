@@ -1,3 +1,4 @@
+import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,8 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      height: 60.toHeight,
+      padding: EdgeInsets.symmetric(horizontal: 16.toWidth),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -22,7 +23,7 @@ class TopBar extends StatelessWidget {
             child: Container(
               child: Icon(
                 Icons.chevron_left,
-                size: 40,
+                size: 40.toFont,
                 color: ColorConstants.purple,
               ),
             ),

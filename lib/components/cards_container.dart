@@ -1,6 +1,7 @@
 import 'package:coding_challenge_2021/components/card_clipper.dart';
 import 'package:coding_challenge_2021/components/gradient_text.dart';
 import 'package:coding_challenge_2021/models/card_model.dart';
+import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -204,8 +205,8 @@ class CreditCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 20,
-          left: 20,
+          top: 20.toHeight,
+          left: 20.toWidth,
           child: GradientText(cardModel.title.toUpperCase(),
               gradient: LinearGradient(
                 colors: [
@@ -219,8 +220,8 @@ class CreditCard extends StatelessWidget {
               letterSpacing: 3.5),
         ),
         Positioned(
-          bottom: 20,
-          left: 20,
+          bottom: 20.toHeight,
+          left: 20.toWidth,
           child: GradientText(
             "\$" + cardModel.amount.toString().toUpperCase(),
             gradient: LinearGradient(
@@ -236,12 +237,12 @@ class CreditCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: -40,
-          right: -40,
+          bottom: -40.toHeight,
+          right: -40.toWidth,
           child: Container(
             child: Image.asset(
               cardModel.pizzaBgImage,
-              height: 180,
+              height: 180.toHeight,
             ),
           ),
         ),

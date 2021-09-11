@@ -108,7 +108,6 @@ class _CheckoutPageState extends State<CheckoutPage>
               cardHeightAnimation: cardHeightAnimation,
               updateIsDetailOpen: updateIsDetailOpen,
             ),
-            SizedBox(height: 20),
             CardDetails(
               spendContainerOpacity: spendContainerOpacity,
               selectedCard: selectedCard,

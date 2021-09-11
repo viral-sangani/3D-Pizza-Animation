@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:coding_challenge_2021/components/pizza_topping.dart';
 import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
+import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:coding_challenge_2021/view_models/ingridients_view_model.dart';
 import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
@@ -28,9 +29,7 @@ class Pizza extends StatefulWidget {
 
 class _PizzaState extends State<Pizza> with TickerProviderStateMixin {
   late AnimationController fadePlateAnimationController;
-
   late Animation<double> fadePlateVal;
-
   bool hasMovedIn = false;
 
   @override
@@ -69,7 +68,7 @@ class _PizzaState extends State<Pizza> with TickerProviderStateMixin {
         MediaQuery.of(context).size.width / 2 - Constants.PIZZAPADDING;
 
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.symmetric(vertical: 10.toHeight),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -92,7 +91,7 @@ class _PizzaState extends State<Pizza> with TickerProviderStateMixin {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                   ),
-                  height: pizzaSize * 2,
+                  height: (pizzaSize * 2 - 25).toHeight,
                   child: FadeTransition(
                     opacity: fadePlateVal,
                     child: Image.asset("assets/Plate.png"),
@@ -109,7 +108,8 @@ class _PizzaState extends State<Pizza> with TickerProviderStateMixin {
                   child: Padding(
                     padding: const EdgeInsets.all(14.0),
                     child: Image.asset(
-                        widget.pizzaPath ?? pizzaViewModel.getSauceType()),
+                      widget.pizzaPath ?? pizzaViewModel.getSauceType(),
+                    ),
                   ),
                 ),
                 if (ingridientsProvider.ingridients.length > 0)
@@ -165,15 +165,15 @@ class _PizzaState extends State<Pizza> with TickerProviderStateMixin {
   Map<String, dynamic> getIngridientsBasePath(
       Ingridients ingridient, int index) {
     if (ingridient == Ingridients.BASIL)
-      return {"path": Constants.BASIL[index], "size": 45.0};
+      return {"path": Constants.BASIL[index], "size": 48.0};
     else if (ingridient == Ingridients.BROCCOLI)
-      return {"path": Constants.BROCCOLI[index], "size": 40.0};
+      return {"path": Constants.BROCCOLI[index], "size": 37.0};
     else if (ingridient == Ingridients.MASHROOM)
-      return {"path": Constants.MASHROOM[index], "size": 65.0};
+      return {"path": Constants.MASHROOM[index], "size": 58.0};
     else if (ingridient == Ingridients.ONION)
-      return {"path": Constants.ONION[index], "size": 58.0};
+      return {"path": Constants.ONION[index], "size": 46.0};
     else if (ingridient == Ingridients.SAUSAGE)
-      return {"path": Constants.SAUSAGE[index], "size": 47.0};
+      return {"path": Constants.SAUSAGE[index], "size": 42.0};
     return {};
   }
 }

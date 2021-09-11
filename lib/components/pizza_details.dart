@@ -1,3 +1,4 @@
+import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,8 @@ class PizzaDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
-      width: 250,
+      height: 300.toHeight,
+      width: 250.toWidth,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(125),
@@ -34,13 +35,13 @@ class PizzaDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 30),
+          SizedBox(height: 30.toHeight),
           Text(
             // "Test",
             pizzaObj["name"],
             style: CustomTextStyles.pizzaName(),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 20.toHeight),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -49,13 +50,13 @@ class PizzaDetails extends StatelessWidget {
                 Icon(
                   Icons.star,
                   color: ColorConstants.purple,
-                  size: 25,
+                  size: 25.toFont,
                 ),
               for (int i = 1; i <= 5 - pizzaObj["rating"]; i++)
                 Icon(
                   Icons.star_border,
                   color: ColorConstants.purple,
-                  size: 25,
+                  size: 25.toFont,
                 ),
             ],
           ),
