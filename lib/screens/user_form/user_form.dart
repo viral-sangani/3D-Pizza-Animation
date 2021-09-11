@@ -342,7 +342,7 @@ class _UserFormState extends State<UserForm> {
     LoadingDialog().hide();
 
     if (_userDataProvider.userData != null) {
-      SetupRoutes.pushAndRemoveAll(context, Routes.PIZZA_SELECTION);
+      SetupRoutes.pushAndRemoveAll(context, Routes.HOME);
     } else {
       ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(SnackBar(
         backgroundColor: ColorConstants.RED,

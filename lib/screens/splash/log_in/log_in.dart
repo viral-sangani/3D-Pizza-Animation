@@ -113,7 +113,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
       if (_userDataProvider.userData == null) {
         SetupRoutes.pushAndRemoveAll(context, Routes.USER_FORM);
       } else {
-        SetupRoutes.pushAndRemoveAll(context, Routes.PIZZA_SELECTION);
+        SetupRoutes.pushAndRemoveAll(context, Routes.HOME);
       }
     } else {
       setState(() {

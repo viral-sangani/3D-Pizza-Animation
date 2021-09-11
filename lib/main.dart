@@ -14,7 +14,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (ctx) => IngridientsController()),
+        ChangeNotifierProvider(create: (context) => IngridientsController()),
         ChangeNotifierProvider<UserDataProvider>(
             create: (context) => UserDataProvider()),
       ],

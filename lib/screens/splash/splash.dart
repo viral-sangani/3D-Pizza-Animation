@@ -203,8 +203,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
                                                 context, Routes.USER_FORM);
                                           } else {
                                             SetupRoutes.pushAndRemoveAll(
-                                                context,
-                                                Routes.PIZZA_SELECTION);
+                                                context, Routes.HOME);
                                           }
                                         }
                                       : _animate,

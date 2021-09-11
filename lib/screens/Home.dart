@@ -1,6 +1,7 @@
 import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/routes/routes.dart';
 import 'package:coding_challenge_2021/services/size_config.dart';
+import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _HomeState extends State<Home> {
       'rating': 4.0,
     },
     {
-      'name': 'paneer pizza',
+      'name': 'Paneer pizza',
       'image': 'assets/Pizzas/Pizza_3.png',
       'rating': 4.5,
     },
@@ -27,8 +28,8 @@ class _HomeState extends State<Home> {
       'rating': 3.0,
     },
     {
-      'name': 'plain pizza',
-      'image': 'assets/Pizzas/Pizza_1.png',
+      'name': 'Broccoli pizza',
+      'image': 'assets/Pizzas/Pizza_4.png',
       'rating': 4.0,
     },
   ];
@@ -39,11 +40,41 @@ class _HomeState extends State<Home> {
     SizeConfig().init(context);
     return Scaffold(
       floatingActionButton: TextButton(
-        onPressed: () {
-          SetupRoutes.push(context, Routes.DIYPIZZA);
-        },
-        child: Text('Customize pizza'),
-      ),
+          onPressed: () {
+            SetupRoutes.push(context, Routes.DIYPIZZA);
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 40.toHeight),
+            alignment: Alignment.center,
+            width: SizeConfig().screenWidth - 50.toWidth,
+            height: 70.toHeight,
+            decoration: BoxDecoration(
+              color: ColorConstants.purple,
+              border: Border(),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20.toWidth),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: ColorConstants.purple,
+                  blurRadius: 5,
+                  offset: Offset(-3.0, -0.2),
+                )
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Customize your pizza',
+                  style: TextStyle(
+                    color: ColorConstants.white,
+                    fontSize: 20.toWidth,
+                  ),
+                ),
+              ],
+            ),
+          )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SafeArea(
         child: Container(
@@ -89,23 +120,28 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 SizedBox(height: 50),
-                Wrap(
-                    alignment: WrapAlignment.start,
-                    runAlignment: WrapAlignment.start,
-                    runSpacing: 10.0,
-                    spacing: 15.0,
-                    children: List.generate(4, (index) {
-                      String pizzaName = pizzaOptions[index]['name'] as String;
-                      pizzaName = pizzaName.toLowerCase();
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 100.0),
+                  child: Wrap(
+                      alignment: WrapAlignment.start,
+                      runAlignment: WrapAlignment.start,
+                      runSpacing: 10.0,
+                      spacing: 15.0,
+                      children: List.generate(4, (index) {
+                        String pizzaName =
+                            pizzaOptions[index]['name'] as String;
+                        pizzaName = pizzaName.toLowerCase();
 
-                      if (pizzaName.contains(searchText.toLowerCase().trim())) {
-                        return pizzaCard(
-                            pizzaOptions[index]['image'] as String,
-                            pizzaOptions[index]['name'] as String,
-                            pizzaOptions[index]['rating'] as double);
-                      } else
-                        return SizedBox();
-                    })),
+                        if (pizzaName
+                            .contains(searchText.toLowerCase().trim())) {
+                          return pizzaCard(
+                              pizzaOptions[index]['image'] as String,
+                              pizzaOptions[index]['name'] as String,
+                              pizzaOptions[index]['rating'] as double);
+                        } else
+                          return SizedBox();
+                      })),
+                ),
               ],
             ),
           ),
