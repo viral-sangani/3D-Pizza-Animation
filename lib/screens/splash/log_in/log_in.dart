@@ -177,71 +177,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
               await _verifyOTPNumber();
             }
           },
-          child:
-              // Align(
-              //   alignment: Alignment.centerRight,
-              //   child: Container(
-              //     padding: EdgeInsets.symmetric(horizontal: 40.toHeight),
-              //     alignment: Alignment.center,
-              //     width: SizeConfig().screenWidth - 50.toWidth,
-              //     height: 70.toHeight,
-              //     decoration: BoxDecoration(
-              //       color: ColorConstants.purple,
-              //       border: Border(),
-              //       borderRadius: BorderRadius.only(
-              //         topLeft: Radius.circular(20.toWidth),
-              //         bottomLeft: Radius.circular(20.toWidth),
-              //       ),
-              //       boxShadow: [
-              //         BoxShadow(
-              //           color: ColorConstants.purple,
-              //           blurRadius: 5,
-              //           // spreadRadius: 8,
-              //           offset: Offset(-3.0, -0.2),
-              //         )
-              //       ],
-              //     ),
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //       children: [
-              //         Text(
-              //           _isPhoneNumberScreen ? 'Next' : 'Submit',
-              //           style: TextStyle(
-              //             color: ColorConstants.white,
-              //             fontSize: 26.toWidth,
-              //           ),
-              //         ),
-              //         RichText(
-              //           text: TextSpan(
-              //             text: '>',
-              //             style: CustomTextStyles.customTextStyle(
-              //               ColorConstants.white.withOpacity(0.2),
-              //               size: 25,
-              //             ),
-              //             children: [
-              //               TextSpan(
-              //                 text: '>',
-              //                 style: CustomTextStyles.customTextStyle(
-              //                   ColorConstants.white.withOpacity(0.4),
-              //                   size: 25,
-              //                 ),
-              //               ),
-              //               TextSpan(
-              //                 text: '>',
-              //                 style: CustomTextStyles.customTextStyle(
-              //                   ColorConstants.white,
-              //                   size: 25,
-              //                 ),
-              //               )
-              //             ],
-              //           ),
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              // )
-              //////////
-              Container(
+          child: Container(
             alignment: Alignment.center,
             width: 140,
             height: 50,
@@ -253,7 +189,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
               ),
             ),
             decoration: BoxDecoration(
-                color: ColorConstants.purple,
+                color: ColorConstants.amber,
                 border: Border(),
                 borderRadius: BorderRadius.circular(30)),
           ),
