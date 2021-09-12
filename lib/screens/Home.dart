@@ -2,6 +2,7 @@ import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/routes/routes.dart';
 import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
+import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -11,28 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var pizzaOptions = [
-    {
-      'name': 'Plain pizza',
-      'image': 'assets/Pizzas/Pizza_1.png',
-      'rating': 4.0,
-    },
-    {
-      'name': 'Paneer pizza',
-      'image': 'assets/Pizzas/Pizza_3.png',
-      'rating': 4.5,
-    },
-    {
-      'name': 'Mushroom pizza',
-      'image': 'assets/Pizzas/Pizza_2.png',
-      'rating': 3.0,
-    },
-    {
-      'name': 'Broccoli pizza',
-      'image': 'assets/Pizzas/Pizza_4.png',
-      'rating': 4.0,
-    },
-  ];
+  var pizzaOptions = Constants.pizzaList;
   String searchText = '';
 
   @override
@@ -125,9 +105,9 @@ class _HomeState extends State<Home> {
                   child: Wrap(
                       alignment: WrapAlignment.start,
                       runAlignment: WrapAlignment.start,
-                      runSpacing: 10.0,
-                      spacing: 15.0,
-                      children: List.generate(4, (index) {
+                      runSpacing: 15.0,
+                      spacing: 20.0,
+                      children: List.generate(pizzaOptions.length, (index) {
                         String pizzaName =
                             pizzaOptions[index]['name'] as String;
                         pizzaName = pizzaName.toLowerCase();
@@ -135,9 +115,8 @@ class _HomeState extends State<Home> {
                         if (pizzaName
                             .contains(searchText.toLowerCase().trim())) {
                           return pizzaCard(
-                              pizzaOptions[index]['image'] as String,
-                              pizzaOptions[index]['name'] as String,
-                              pizzaOptions[index]['rating'] as double);
+                              pizzaOptions[index]['path'] as String,
+                              pizzaOptions[index]['name'] as String);
                         } else
                           return SizedBox();
                       })),
@@ -150,38 +129,49 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget pizzaCard(String pizzaImage, String title, double rating) {
+  Widget pizzaCard(String pizzaImage, String title) {
     Widget pizzaCard = SizedBox();
-    pizzaCard = Column(
-      children: <Widget>[
-        Container(
-          height: 150,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(70),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 7,
-                offset: Offset(0, 3),
+    pizzaCard = Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 2,
+            blurRadius: 7,
+            offset: Offset(0, 3),
+          ),
+        ],
+        borderRadius: BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0, right: 8, left: 8),
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 150,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(70),
               ),
-            ],
-          ),
-          child: Image.asset(pizzaImage),
+              child: Image.asset(pizzaImage),
+            ),
+            SizedBox(height: 15),
+            Container(
+              child: Text(
+                title,
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.6),
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(height: 20),
+          ],
         ),
-        SizedBox(height: 5),
-        Container(
-          child: Text(
-            title,
-            style: TextStyle(
-                color: Colors.black.withOpacity(0.6),
-                fontSize: 16,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold),
-          ),
-        ),
-        SizedBox(height: 20),
-      ],
+      ),
     );
     return pizzaCard;
   }

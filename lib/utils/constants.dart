@@ -117,6 +117,39 @@ class Constants {
     {"path": 'assets/Basil/Basil_8.png', "size": 30.0},
   ];
 
+  static List<Map<String, dynamic>> pizzaList = [
+    {
+      "name": "Tomato Pizza",
+      "rating": 4,
+      "price": "13",
+      "path": Constants.PIZZAS[0],
+    },
+    {
+      "name": "Pepperoni Pizza",
+      "rating": 3,
+      "price": "15",
+      "path": Constants.PIZZAS[1],
+    },
+    {
+      "name": "Pineapple Pizza",
+      "rating": 2,
+      "price": "14",
+      "path": Constants.PIZZAS[2],
+    },
+    {
+      "name": "Veg. Pizza",
+      "rating": 4,
+      "price": "12",
+      "path": Constants.PIZZAS[3],
+    },
+    {
+      "name": "Cheeze Burst",
+      "rating": 5,
+      "price": "18",
+      "path": Constants.PIZZAS[4],
+    }
+  ];
+
   static const double cardContainerHeightBegin = 250;
   static const double cardContainerHeightEnd = 500;
 

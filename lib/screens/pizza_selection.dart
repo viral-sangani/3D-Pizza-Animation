@@ -39,7 +39,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
   late Animation<double> rotateBg;
   late double rotateVal = 0;
 
-  late Map<String, dynamic> pizzaObj = pizzas[1];
+  late Map<String, dynamic> pizzaObj = Constants.pizzaList[1];
 
   @override
   void initState() {
@@ -70,7 +70,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
     );
 
     _pageController.addListener(() {
-      pizzaObj = pizzas[_pageController.page!.round()];
+      pizzaObj = Constants.pizzaList[_pageController.page!.round()];
       setState(() {});
     });
 
@@ -170,7 +170,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
                       padding: EdgeInsets.only(top: 42.toHeight),
                       height: 650.toHeight,
                       child: PageView.builder(
-                        itemCount: pizzas.length,
+                        itemCount: Constants.pizzaList.length,
                         controller: _pageController,
                         onPageChanged: (i) {
                           setState(() {
@@ -222,7 +222,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
                                             child: Container(
                                               padding: EdgeInsets.all(18),
                                               child: Image.asset(
-                                                pizzas[i]['path'],
+                                                Constants.pizzaList[i]['path'],
                                               ),
                                             ),
                                           ),
@@ -252,39 +252,6 @@ class _PizzaSelectionState extends State<PizzaSelection>
     );
   }
 }
-
-List<Map<String, dynamic>> pizzas = [
-  {
-    "name": "Tomato Pizza",
-    "rating": 4,
-    "price": "13",
-    "path": Constants.PIZZAS[0],
-  },
-  {
-    "name": "Pepperoni Pizza",
-    "rating": 3,
-    "price": "15",
-    "path": Constants.PIZZAS[1],
-  },
-  {
-    "name": "Pineapple Pizza",
-    "rating": 2,
-    "price": "14",
-    "path": Constants.PIZZAS[2],
-  },
-  {
-    "name": "Veg. Pizza",
-    "rating": 4,
-    "price": "12",
-    "path": Constants.PIZZAS[3],
-  },
-  {
-    "name": "Cheeze Burst",
-    "rating": 5,
-    "price": "18",
-    "path": Constants.PIZZAS[4],
-  }
-];
 
 Route _createRoute(String path) {
   return PageRouteBuilder(
