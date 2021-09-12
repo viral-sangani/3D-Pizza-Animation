@@ -44,6 +44,8 @@ flutter:
     - assets/Bread/Bread_3.png
     - assets/illustrations/splash_bg.png
     - assets/illustrations/user_form_image.png
+    - assets/lottie_files/
+
 
   fonts:
     - family: Montserrat

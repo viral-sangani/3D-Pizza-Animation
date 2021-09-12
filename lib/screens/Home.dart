@@ -5,6 +5,7 @@ import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -68,7 +69,7 @@ class _HomeState extends State<Home> {
                     style: CustomTextStyles.blackBold(size: 25),
                   ),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 20),
                 Container(
                   width: 300.toWidth,
                   color: Color(0xFFF7F7FF),
@@ -99,7 +100,29 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 20),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Color(0xFFFFC700),
+                      border: Border(),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20.toWidth),
+                      )),
+                  child: ClipRRect(
+                    clipBehavior: Clip.hardEdge,
+                    child: Transform.scale(
+                        scale: 0.8,
+                        child: Lottie.asset(Constants.HOME_BANNER_ANIMATION)),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Hungry ? Quick order',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left),
+                ),
+                SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 100.0),
                   child: Wrap(

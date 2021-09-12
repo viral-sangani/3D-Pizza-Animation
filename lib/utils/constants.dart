@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 class Constants {
   static const double PIZZAPADDING = 40;
   static const double HEADERHEIGHT = 200;
+  static const PIZZA_SLICE_ANIMATION = 'assets/splash/pizza-slice.json';
+  static const HOME_BANNER_ANIMATION =
+      'assets/lottie_files/home_banner_card.json';
 
   static const List<String> PIZZAS = [
     'assets/Pizzas/Pizza_1.png',
@@ -12,7 +15,6 @@ class Constants {
     'assets/Pizzas/Pizza_4.png',
     'assets/Pizzas/Pizza_5.png',
   ];
-  static const PIZZA_SLICE_ANIMATION = 'assets/splash/pizza-slice.json';
 
   static const List<String> BREADS = [
     'assets/Bread/Bread_1.png',
