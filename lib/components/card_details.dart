@@ -12,10 +12,12 @@ import 'package:provider/provider.dart';
 class CardDetails extends StatelessWidget {
   final Animation<double> spendContainerOpacity;
   final int? selectedCard;
+  final Function onPayNow;
   const CardDetails({
     Key? key,
     required this.spendContainerOpacity,
     this.selectedCard,
+    required this.onPayNow,
   }) : super(key: key);
 
   @override
@@ -85,9 +87,12 @@ class CardDetails extends StatelessWidget {
               ),
 
               /// Pay Now widget
-              PayNowWidget(
-                selectedCard: selectedCard,
-                pizzaViewModel: pizzaViewModel,
+              GestureDetector(
+                onTap: () => onPayNow(),
+                child: PayNowWidget(
+                  selectedCard: selectedCard,
+                  pizzaViewModel: pizzaViewModel,
+                ),
               ),
             ],
           ),

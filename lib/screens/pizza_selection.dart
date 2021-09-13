@@ -145,7 +145,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
                       child: Container(
                         alignment: Alignment.center,
                         width:
-                            (MediaQuery.of(context).size.width - 148).toWidth,
+                            (MediaQuery.of(context).size.width - 184).toWidth,
                         height: 400.toHeight,
                         child: Column(
                           children: [Image.asset("assets/Plate.png")],
