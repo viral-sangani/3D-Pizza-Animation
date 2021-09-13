@@ -36,7 +36,7 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
     super.initState();
     selectedPizza =
         Provider.of<PizzaViewModel>(context, listen: false).selectedPizzaObj;
-    pizzaPath = selectedPizza['path'] ?? "";
+    pizzaPath = selectedPizza['path'] ?? null;
     _controller = AnimationController(
       duration: const Duration(milliseconds: 300),
       vsync: this,
