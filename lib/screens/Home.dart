@@ -205,6 +205,7 @@ class _HomeState extends State<Home> {
     return pizzaCard;
   }
 
+  /// if [isCustomBuild] is true button and text colors are inverted
   Widget customButton(String text, {bool isCustomBuild: false}) {
     return InkWell(
       onTap: () {
