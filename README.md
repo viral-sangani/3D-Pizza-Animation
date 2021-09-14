@@ -18,4 +18,17 @@ DIY Pizza is a pizza ordering app which lets you customise and build your own pi
     - Splash screen - https://lottiefiles.com/22795-pizza-slice
     - Home screen - https://lottiefiles.com/29308-pizza-process
 
+## App Walkthrough
+
+- Build Pizza
+<p style='padding: 20px 50px;'>
+ <img src="./assets/demo/build-pizza.gif" alt='app demo1'/>
+</p>
+
+
+
+- Customise Pizza
+<p style='padding: 20px 50px;'>
+ <img src="./assets/demo/customize-pizza.gif" alt='app demo2'/>
+</p>
 
