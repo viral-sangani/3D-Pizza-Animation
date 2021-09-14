@@ -40,15 +40,15 @@ DIY Pizza is a pizza ordering app which lets you customise and build your own pi
 <br/>
 
 ## Build Pizza
-<p style='padding: 20px 50px;'>
- <img src="./assets/demo/build-pizza.gif" alt='app demo1'/>
+<p align="center" style='padding: 20px 50px;'>
+ <img src="./assets/demo/build-pizza.gif" alt='app demo1' height='400px'/>
 </p>
 
 <br/>
 
 ##  Customise Pizza
-<p style='padding: 20px 50px;'>
- <img src="./assets/demo/customize-pizza.gif" alt='app demo2'/>
+<p align="center" style='padding: 20px 50px;'>
+ <img src="./assets/demo/customize-pizza.gif" alt='app demo2' height='400px'/>
 </p>
 
 ## 🗺 Roadmap
