@@ -1,10 +1,10 @@
 import 'package:coding_challenge_2021/routes/route_names.dart';
-import 'package:coding_challenge_2021/screens/Home.dart';
-import 'package:coding_challenge_2021/screens/checkout_page.dart';
+import 'package:coding_challenge_2021/screens/checkout_screen.dart';
 import 'package:coding_challenge_2021/screens/diy_pizza_screen.dart';
-import 'package:coding_challenge_2021/screens/splash.dart';
-import 'package:coding_challenge_2021/screens/pizza_selection.dart';
+import 'package:coding_challenge_2021/screens/home_screen.dart';
+import 'package:coding_challenge_2021/screens/pizza_selection_screen.dart';
 import 'package:coding_challenge_2021/screens/splash/splash.dart';
+import 'package:coding_challenge_2021/screens/splash_screen.dart';
 import 'package:coding_challenge_2021/screens/user_form/user_form.dart';
 import 'package:flutter/material.dart';
 
