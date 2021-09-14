@@ -24,7 +24,7 @@ class TopBar extends StatelessWidget {
               child: Icon(
                 Icons.chevron_left,
                 size: 40.toFont,
-                color: ColorConstants.purple,
+                color: ColorConstants.amber,
               ),
             ),
           ),

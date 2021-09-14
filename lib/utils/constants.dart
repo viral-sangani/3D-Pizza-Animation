@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 class Constants {
   static const double PIZZAPADDING = 40;
   static const double HEADERHEIGHT = 200;
+  static const PIZZA_SLICE_ANIMATION = 'assets/splash/pizza-slice.json';
+  static const PIZZA_CUTTER = 'assets/pizza-cutter.png';
+  static const PIZZA_ICON = 'assets/pizza-icon.png';
+  static const PIZZA_PLATE = 'assets/Plate.png';
+  static const HOME_BANNER_ANIMATION =
+      'assets/lottie_files/home_banner_card.json';
 
   static const List<String> PIZZAS = [
     'assets/Pizzas/Pizza_1.png',
@@ -12,7 +18,6 @@ class Constants {
     'assets/Pizzas/Pizza_4.png',
     'assets/Pizzas/Pizza_5.png',
   ];
-  static const PIZZA_SLICE_ANIMATION = 'assets/splash/pizza-slice.json';
 
   static const List<String> BREADS = [
     'assets/Bread/Bread_1.png',
@@ -115,6 +120,39 @@ class Constants {
     {"path": 'assets/Onion/Onion_2.png', "size": 42.0},
     {"path": 'assets/Mushroom/Mushroom_6.png', "size": 60.0},
     {"path": 'assets/Basil/Basil_8.png', "size": 30.0},
+  ];
+
+  static List<Map<String, dynamic>> pizzaList = [
+    {
+      "name": "Tomato Pizza",
+      "rating": 4,
+      "price": "13",
+      "path": Constants.PIZZAS[0],
+    },
+    {
+      "name": "Pepperoni Pizza",
+      "rating": 3,
+      "price": "15",
+      "path": Constants.PIZZAS[1],
+    },
+    {
+      "name": "Pineapple Pizza",
+      "rating": 2,
+      "price": "14",
+      "path": Constants.PIZZAS[2],
+    },
+    {
+      "name": "Veg. Pizza",
+      "rating": 4,
+      "price": "12",
+      "path": Constants.PIZZAS[3],
+    },
+    {
+      "name": "Cheeze Burst",
+      "rating": 5,
+      "price": "18",
+      "path": Constants.PIZZAS[4],
+    }
   ];
 
   static const double cardContainerHeightBegin = 250;

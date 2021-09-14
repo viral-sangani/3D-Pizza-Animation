@@ -1,5 +1,5 @@
 import 'package:coding_challenge_2021/services/size_config.dart';
-import 'package:coding_challenge_2021/utils/constants.dart';
+import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
 import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +21,7 @@ class PayNowWidget extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Constants
-            .cardModel[selectedCard ?? Constants.cardModel.length - 1]
-            .bottomContainer[1],
+        color: ColorConstants.amber,
       ),
       child: Row(
         children: [

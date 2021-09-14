@@ -1,8 +1,15 @@
+import 'dart:async';
+
+import 'package:coding_challenge_2021/common_components/end_animation.dart';
 import 'package:coding_challenge_2021/components/card_details.dart';
 import 'package:coding_challenge_2021/components/cards_container.dart';
 import 'package:coding_challenge_2021/components/topbar.dart';
+import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
+import 'package:coding_challenge_2021/view_models/ingridients_view_model.dart';
+import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CheckoutPage extends StatefulWidget {
   CheckoutPage({Key? key}) : super(key: key);
@@ -21,6 +28,8 @@ class _CheckoutPageState extends State<CheckoutPage>
   late Animation<double> cardSize;
   late Animation<double> cardTransform;
   late Animation<double> spendContainerOpacity;
+
+  bool showEndLottie = false;
 
   int? selectedCard;
   @override
@@ -90,31 +99,45 @@ class _CheckoutPageState extends State<CheckoutPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            TopBar(
-              selectedCard: selectedCard,
+    return showEndLottie
+        ? EndAnimation()
+        : Scaffold(
+            backgroundColor: Colors.grey[100],
+            body: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  TopBar(
+                    selectedCard: selectedCard,
+                  ),
+                  CardsContainer(
+                    animationController: animationController,
+                    containerHeightAnimation: containerHeightAnimation,
+                    cardXAnimation: cardXAnimation,
+                    cardSize: cardSize,
+                    cardTransform: cardTransform,
+                    cardHeightAnimation: cardHeightAnimation,
+                    updateIsDetailOpen: updateIsDetailOpen,
+                  ),
+                  CardDetails(
+                    spendContainerOpacity: spendContainerOpacity,
+                    onPayNow: () {
+                      setState(() {
+                        showEndLottie = true;
+                      });
+                      Timer(Duration(seconds: 4), () {
+                        Navigator.popAndPushNamed(context, Routes.HOME);
+                      });
+
+                      Provider.of<PizzaViewModel>(context, listen: false)
+                          .selectedPizzaObj = {};
+                      Provider.of<IngridientsViewModel>(context, listen: false)
+                          .ingridients = [];
+                    },
+                  ),
+                ],
+              ),
             ),
-            CardsContainer(
-              animationController: animationController,
-              containerHeightAnimation: containerHeightAnimation,
-              cardXAnimation: cardXAnimation,
-              cardSize: cardSize,
-              cardTransform: cardTransform,
-              cardHeightAnimation: cardHeightAnimation,
-              updateIsDetailOpen: updateIsDetailOpen,
-            ),
-            CardDetails(
-              spendContainerOpacity: spendContainerOpacity,
-              selectedCard: selectedCard,
-            ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }

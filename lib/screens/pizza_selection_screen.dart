@@ -7,6 +7,7 @@ import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
+import 'package:coding_challenge_2021/view_models/ingridients_view_model.dart';
 import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
   late Animation<double> rotateBg;
   late double rotateVal = 0;
 
-  late Map<String, dynamic> pizzaObj = pizzas[1];
+  late Map<String, dynamic> pizzaObj = Constants.pizzaList[1];
 
   @override
   void initState() {
@@ -70,7 +71,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
     );
 
     _pageController.addListener(() {
-      pizzaObj = pizzas[_pageController.page!.round()];
+      pizzaObj = Constants.pizzaList[_pageController.page!.round()];
       setState(() {});
     });
 
@@ -106,13 +107,28 @@ class _PizzaSelectionState extends State<PizzaSelection>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    GestureDetector(
+                      onTap: () {
+                        Provider.of<IngridientsViewModel>(context,
+                                listen: false)
+                            .ingridients = [];
+                        Provider.of<PizzaViewModel>(context, listen: false)
+                            .selectedPizzaObj = {};
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.chevron_left,
+                        size: 30.toFont,
+                        color: ColorConstants.amber,
+                      ),
+                    ),
                     Text(
-                      "Order Manually",
+                      "Customize",
                       style: CustomTextStyles.orderPizza(),
                     ),
                     Icon(
                       Icons.shopping_cart_outlined,
-                      color: ColorConstants.purple,
+                      color: ColorConstants.amber,
                       size: 35.toFont,
                     ),
                   ],
@@ -126,7 +142,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
                     vertical: 5.toHeight,
                   ),
                   decoration: BoxDecoration(
-                    color: ColorConstants.purple,
+                    color: ColorConstants.amber,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -145,7 +161,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
                       child: Container(
                         alignment: Alignment.center,
                         width:
-                            (MediaQuery.of(context).size.width - 148).toWidth,
+                            (MediaQuery.of(context).size.width - 184).toWidth,
                         height: 400.toHeight,
                         child: Column(
                           children: [Image.asset("assets/Plate.png")],
@@ -170,7 +186,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
                       padding: EdgeInsets.only(top: 42.toHeight),
                       height: 650.toHeight,
                       child: PageView.builder(
-                        itemCount: pizzas.length,
+                        itemCount: Constants.pizzaList.length,
                         controller: _pageController,
                         onPageChanged: (i) {
                           setState(() {
@@ -222,7 +238,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
                                             child: Container(
                                               padding: EdgeInsets.all(18),
                                               child: Image.asset(
-                                                pizzas[i]['path'],
+                                                Constants.pizzaList[i]['path'],
                                               ),
                                             ),
                                           ),
@@ -252,39 +268,6 @@ class _PizzaSelectionState extends State<PizzaSelection>
     );
   }
 }
-
-List<Map<String, dynamic>> pizzas = [
-  {
-    "name": "Tomato Pizza",
-    "rating": 4,
-    "price": "13",
-    "path": Constants.PIZZAS[0],
-  },
-  {
-    "name": "Pepperoni Pizza",
-    "rating": 3,
-    "price": "15",
-    "path": Constants.PIZZAS[1],
-  },
-  {
-    "name": "Pineapple Pizza",
-    "rating": 2,
-    "price": "14",
-    "path": Constants.PIZZAS[2],
-  },
-  {
-    "name": "Veg. Pizza",
-    "rating": 4,
-    "price": "12",
-    "path": Constants.PIZZAS[3],
-  },
-  {
-    "name": "Cheeze Burst",
-    "rating": 5,
-    "price": "18",
-    "path": Constants.PIZZAS[4],
-  }
-];
 
 Route _createRoute(String path) {
   return PageRouteBuilder(

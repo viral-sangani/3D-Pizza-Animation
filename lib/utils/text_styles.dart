@@ -26,10 +26,10 @@ class CustomTextStyles {
         fontWeight: FontWeight.w800,
         fontFamily: "Montserrat",
       );
-  static TextStyle orderPizza({double size = 40}) => TextStyle(
+  static TextStyle orderPizza({double size = 30}) => TextStyle(
         fontFamily: "AllertaStencil",
         fontSize: size,
-        color: ColorConstants.purple,
+        color: ColorConstants.amber,
         // fontWeight: FontWeight.w700,
       );
 
@@ -43,12 +43,12 @@ class CustomTextStyles {
   static TextStyle pizzaName({int size = 40}) => TextStyle(
         fontFamily: "AllertaStencil",
         fontSize: 30,
-        color: ColorConstants.purple,
+        color: ColorConstants.amber,
         // fontWeight: FontWeight.w700,
       );
 
   static TextStyle priceStyle({int size = 40}) => TextStyle(
-        color: ColorConstants.purple,
+        color: ColorConstants.amber,
         fontSize: size.toFont,
         letterSpacing: 3,
         fontWeight: FontWeight.bold,

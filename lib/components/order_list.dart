@@ -31,7 +31,7 @@ class OrderList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  pizzaViewModel.selectedPizzaObj['name'],
+                  pizzaViewModel.selectedPizzaObj['name'] ?? "Pizza",
                   style: CustomTextStyles.commonMontserrat(),
                 ),
                 SizedBox(height: 8),
