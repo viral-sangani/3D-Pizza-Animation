@@ -91,7 +91,7 @@ class _PizzaState extends State<Pizza> with TickerProviderStateMixin {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                   ),
-                  height: (pizzaSize * 2 - 25).toHeight,
+                  height: (pizzaSize * 2 - 42).toHeight,
                   child: FadeTransition(
                     opacity: fadePlateVal,
                     child: Image.asset("assets/Plate.png"),

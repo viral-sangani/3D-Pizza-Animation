@@ -34,6 +34,9 @@ void main() async {
         initialRoute: SetupRoutes.initialRoute,
         routes: SetupRoutes.routes,
         navigatorKey: NavService.navKey,
+        theme: ThemeData(
+          fontFamily: 'Montserrat',
+        ),
       ),
     ),
   );

@@ -2,11 +2,17 @@ import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 
-class Cutlery extends StatelessWidget {
+class Cutlery extends StatefulWidget {
   const Cutlery({
     Key? key,
   }) : super(key: key);
 
+  @override
+  _CutleryState createState() => _CutleryState();
+}
+
+class _CutleryState extends State<Cutlery> {
+  int cutlery = 1;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,37 +31,51 @@ class Cutlery extends StatelessWidget {
             ),
           ),
           Row(children: [
-            Container(
-              width: 40.toWidth,
-              height: 40.toHeight,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.grey[300],
-              ),
-              child: Center(
-                child: Text(
-                  "-",
-                  style: CustomTextStyles.commonMontserrat(size: 20),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  cutlery--;
+                });
+              },
+              child: Container(
+                width: 40.toWidth,
+                height: 40.toHeight,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey[300],
+                ),
+                child: Center(
+                  child: Text(
+                    "-",
+                    style: CustomTextStyles.commonMontserrat(size: 20),
+                  ),
                 ),
               ),
             ),
             SizedBox(width: 10.toWidth),
             Text(
-              "1",
+              cutlery.toString(),
               style: CustomTextStyles.commonMontserrat(size: 20),
             ),
             SizedBox(width: 10.toWidth),
-            Container(
-              width: 40.toWidth,
-              height: 40.toHeight,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.grey[300],
-              ),
-              child: Center(
-                child: Text(
-                  "+",
-                  style: CustomTextStyles.commonMontserrat(size: 20),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  cutlery++;
+                });
+              },
+              child: Container(
+                width: 40.toWidth,
+                height: 40.toHeight,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey[300],
+                ),
+                child: Center(
+                  child: Text(
+                    "+",
+                    style: CustomTextStyles.commonMontserrat(size: 20),
+                  ),
                 ),
               ),
             )
