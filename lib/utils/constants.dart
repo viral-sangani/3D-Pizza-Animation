@@ -5,6 +5,9 @@ class Constants {
   static const double PIZZAPADDING = 40;
   static const double HEADERHEIGHT = 200;
   static const PIZZA_SLICE_ANIMATION = 'assets/splash/pizza-slice.json';
+  static const PIZZA_CUTTER = 'assets/pizza-cutter.png';
+  static const PIZZA_ICON = 'assets/pizza-icon.png';
+  static const PIZZA_PLATE = 'assets/Plate.png';
   static const HOME_BANNER_ANIMATION =
       'assets/lottie_files/home_banner_card.json';
 
