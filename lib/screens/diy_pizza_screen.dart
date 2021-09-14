@@ -61,6 +61,7 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
+                SizedBox(height: 20.toHeight),
                 Container(
                   height: 40.toHeight,
                   padding: EdgeInsets.symmetric(horizontal: 20.toWidth),
@@ -72,18 +73,20 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
                           Provider.of<IngridientsViewModel>(context,
                                   listen: false)
                               .ingridients = [];
+                          Provider.of<PizzaViewModel>(context, listen: false)
+                              .selectedPizzaObj = {};
                           Navigator.pop(context);
                         },
                         child: Icon(
                           Icons.chevron_left,
                           size: 40.toFont,
-                          color: ColorConstants.purple,
+                          color: ColorConstants.amber,
                         ),
                       ),
                       Icon(
                         Icons.shopping_cart_outlined,
                         size: 35.toFont,
-                        color: ColorConstants.purple,
+                        color: ColorConstants.amber,
                       ),
                     ],
                   ),
@@ -180,7 +183,7 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
                   child: Container(
                     width: (MediaQuery.of(context).size.width - 80).toWidth,
                     decoration: BoxDecoration(
-                        color: ColorConstants.purple,
+                        color: ColorConstants.amber,
                         borderRadius: BorderRadius.circular(20)),
                     padding: EdgeInsets.symmetric(vertical: 16.toHeight),
                     child: Center(
@@ -233,12 +236,12 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
         ),
         decoration: BoxDecoration(
           border: Border.all(
-            color: ColorConstants.purple,
+            color: ColorConstants.amber,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(30),
           color: pizzaViewModel.sauceType == sauceType
-              ? ColorConstants.purple
+              ? ColorConstants.amber
               : Colors.white,
         ),
         child: Text(
@@ -247,7 +250,7 @@ class _DIYPizzaScreenState extends State<DIYPizzaScreen>
             size: 14,
             color: pizzaViewModel.sauceType == sauceType
                 ? Colors.white
-                : ColorConstants.purple,
+                : ColorConstants.amber,
           ),
         ),
       ),

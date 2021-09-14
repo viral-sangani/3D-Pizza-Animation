@@ -1,14 +1,13 @@
 import 'dart:ui';
 
-import 'package:coding_challenge_2021/services/size_config.dart';
-import 'package:coding_challenge_2021/utils/colors.dart';
-import 'package:coding_challenge_2021/view_models/user_data_provider.dart';
-import 'package:flutter/material.dart';
 import 'package:coding_challenge_2021/common_components/loading_widget.dart';
 import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/routes/routes.dart';
 import 'package:coding_challenge_2021/services/firebase_service.dart';
+import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
+import 'package:coding_challenge_2021/view_models/user_data_provider.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
@@ -229,6 +228,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
             decoration: InputDecoration(
               // hintTextDirection: TextDirection.rtl,
               prefixText: '+91 ',
+              prefixStyle: TextStyle(color: Colors.black),
               // floatingLabelBehavior: FloatingLabelBehavior.always,
               hintText: "Enter Phone Number",
               hintStyle: TextStyle(
@@ -253,7 +253,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
             },
           ),
         ),
-        SizedBox(
+        Container(
           height: 30,
         ),
       ],

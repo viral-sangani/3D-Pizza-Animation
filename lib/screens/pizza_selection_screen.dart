@@ -7,6 +7,7 @@ import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
 import 'package:coding_challenge_2021/utils/text_styles.dart';
+import 'package:coding_challenge_2021/view_models/ingridients_view_model.dart';
 import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -106,13 +107,28 @@ class _PizzaSelectionState extends State<PizzaSelection>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    GestureDetector(
+                      onTap: () {
+                        Provider.of<IngridientsViewModel>(context,
+                                listen: false)
+                            .ingridients = [];
+                        Provider.of<PizzaViewModel>(context, listen: false)
+                            .selectedPizzaObj = {};
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.chevron_left,
+                        size: 30.toFont,
+                        color: ColorConstants.amber,
+                      ),
+                    ),
                     Text(
-                      "Order Manually",
+                      "Customize",
                       style: CustomTextStyles.orderPizza(),
                     ),
                     Icon(
                       Icons.shopping_cart_outlined,
-                      color: ColorConstants.purple,
+                      color: ColorConstants.amber,
                       size: 35.toFont,
                     ),
                   ],
@@ -126,7 +142,7 @@ class _PizzaSelectionState extends State<PizzaSelection>
                     vertical: 5.toHeight,
                   ),
                   decoration: BoxDecoration(
-                    color: ColorConstants.purple,
+                    color: ColorConstants.amber,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(

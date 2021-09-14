@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/routes/routes.dart';
+import 'package:coding_challenge_2021/services/firebase_service.dart';
 import 'package:coding_challenge_2021/services/size_config.dart';
 import 'package:coding_challenge_2021/utils/colors.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
@@ -25,34 +26,6 @@ class _HomeState extends State<Home> {
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      // floatingActionButton: Container(
-      //   child: Stack(children: [
-      //     Positioned(
-      //       child: Opacity(
-      //           key: UniqueKey(),
-      //           opacity: 0.5,
-      //           child: Container(
-      //             height: 75,
-      //             decoration: BoxDecoration(
-      //                 gradient: LinearGradient(
-      //                     begin: Alignment.topCenter,
-      //                     end: Alignment.bottomCenter,
-      //                     colors: [
-      //                   ColorConstants.white,
-      //                   ColorConstants.black
-      //                 ])),
-      //           )),
-      //     ),
-      //     Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //       children: <Widget>[
-      //         customButton('Customize pizza'),
-      //         customButton('Build pizza', isCustomBuild: true)
-      //       ],
-      //     ),
-      //   ]),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.only(left: 10, right: 10, top: 20),
@@ -96,7 +69,12 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                           ),
-                          Icon(Icons.filter_alt_outlined)
+                          IconButton(
+                            icon: Icon(Icons.filter_alt_outlined),
+                            onPressed: () {
+                              FirebaseService().signOut();
+                            },
+                          )
                         ],
                       ),
                     ),
@@ -123,83 +101,94 @@ class _HomeState extends State<Home> {
                       children: [
                         Expanded(
                           flex: 2,
-                          child: Container(
-                            padding: EdgeInsets.only(left: 10),
-                            height: 100.toHeight,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFFFC700),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            // alignment: Alignment.centerLeft,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  right: -20,
-                                  child: Image.asset(
-                                    Constants.PIZZA_CUTTER,
-                                    height: 100,
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Build\nPizza",
-                                    style: CustomTextStyles.commonMontserrat(
-                                      size: 28,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, Routes.DIYPIZZA);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(left: 10),
+                              height: 100.toHeight,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFFFC700),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              // alignment: Alignment.centerLeft,
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    right: -20,
+                                    child: Image.asset(
+                                      Constants.PIZZA_CUTTER,
+                                      height: 100,
                                     ),
                                   ),
-                                ),
-                              ],
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Build\nPizza",
+                                      style: CustomTextStyles.commonMontserrat(
+                                        size: 28,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         SizedBox(width: 10),
                         Expanded(
                           flex: 2,
-                          child: Container(
-                            padding: EdgeInsets.only(right: 10),
-                            height: 100.toHeight,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFF7F7FF),
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                width: 2,
-                                color: Color(0xFFFFC700),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, Routes.PIZZASELECTION);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(right: 10),
+                              height: 100.toHeight,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFF7F7FF),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  width: 2,
+                                  color: Color(0xFFFFC700),
+                                ),
                               ),
-                            ),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  left: -20,
-                                  child: Transform.rotate(
-                                    angle: -math.pi / 6,
-                                    child: Image.asset(
-                                      Constants.PIZZA_ICON,
-                                      height: 100,
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    left: -20,
+                                    child: Transform.rotate(
+                                      angle: -math.pi / 6,
+                                      child: Image.asset(
+                                        Constants.PIZZA_ICON,
+                                        height: 100,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    "Customize\nPizza",
-                                    style: CustomTextStyles.commonMontserrat(
-                                      size: 18,
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                      "Customize\nPizza",
+                                      style: CustomTextStyles.commonMontserrat(
+                                        size: 18,
+                                      ),
+                                      textAlign: TextAlign.right,
                                     ),
-                                    textAlign: TextAlign.right,
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: Align(
@@ -209,7 +198,7 @@ class _HomeState extends State<Home> {
                           textAlign: TextAlign.left),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 100.0),
                     child: Wrap(

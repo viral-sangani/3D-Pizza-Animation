@@ -6,7 +6,10 @@ import 'package:coding_challenge_2021/components/cards_container.dart';
 import 'package:coding_challenge_2021/components/topbar.dart';
 import 'package:coding_challenge_2021/routes/route_names.dart';
 import 'package:coding_challenge_2021/utils/constants.dart';
+import 'package:coding_challenge_2021/view_models/ingridients_view_model.dart';
+import 'package:coding_challenge_2021/view_models/pizza_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CheckoutPage extends StatefulWidget {
   CheckoutPage({Key? key}) : super(key: key);
@@ -118,7 +121,6 @@ class _CheckoutPageState extends State<CheckoutPage>
                   ),
                   CardDetails(
                     spendContainerOpacity: spendContainerOpacity,
-                    selectedCard: selectedCard,
                     onPayNow: () {
                       setState(() {
                         showEndLottie = true;
@@ -126,6 +128,11 @@ class _CheckoutPageState extends State<CheckoutPage>
                       Timer(Duration(seconds: 4), () {
                         Navigator.popAndPushNamed(context, Routes.HOME);
                       });
+
+                      Provider.of<PizzaViewModel>(context, listen: false)
+                          .selectedPizzaObj = {};
+                      Provider.of<IngridientsViewModel>(context, listen: false)
+                          .ingridients = [];
                     },
                   ),
                 ],

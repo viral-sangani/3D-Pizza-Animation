@@ -18,9 +18,7 @@ class SetupRoutes {
   static Map<String, WidgetBuilder> get routes {
     return {
       Routes.SPLASH: (context) => Splash(),
-      // Routes.HOME: (context) => PizzaSelection(),
       Routes.USER_FORM: (context) => UserForm(),
-      Routes.PIZZA_SELECTION: (context) => PizzaSelection(),
       Routes.DIYPIZZA: (context) {
         return DIYPizzaScreen();
       },

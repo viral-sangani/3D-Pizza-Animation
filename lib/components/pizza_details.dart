@@ -49,13 +49,13 @@ class PizzaDetails extends StatelessWidget {
               for (int i = 1; i <= pizzaObj["rating"]; i++)
                 Icon(
                   Icons.star,
-                  color: ColorConstants.purple,
+                  color: ColorConstants.amber,
                   size: 25.toFont,
                 ),
               for (int i = 1; i <= 5 - pizzaObj["rating"]; i++)
                 Icon(
                   Icons.star_border,
-                  color: ColorConstants.purple,
+                  color: ColorConstants.amber,
                   size: 25.toFont,
                 ),
             ],
