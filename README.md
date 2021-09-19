@@ -29,6 +29,10 @@ DIY Pizza is a pizza ordering app which lets you customise and build your own pi
  - Lottie
  - Firebase
 
+## Demo Video
+
+[DIY PIZZA DEMO](https://www.canva.com/design/DAEqAYAa5n0/3V1iyzcyn_62BxKSe1FXpQ/watch?utm_content=DAEqAYAa5n0&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton)
+
 ## Inspirations
 
  - UI - https://dribbble.com/shots/8154883-Pizza-order-system
